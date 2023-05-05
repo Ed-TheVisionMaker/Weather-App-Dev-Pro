@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 
-const ShowData = (props) => {
+const SearchData = (props) => {
 console.log(props.data.data.coord, "in show data")
  return (
   <div>
@@ -12,7 +12,7 @@ console.log(props.data.data.coord, "in show data")
   </div>
  )
   // if (this.state.data !== undefined) {
-  //   console.log("showData after if statement")
+  //   console.log("SearchData after if statement")
   //   console.log("was called show data")
   //   const cityId = this.props.match.params.cityId;
   //   const weatherData = this.state.data
@@ -74,11 +74,8 @@ export default class City extends React.Component {
     return (
       <div>
       <div>{cityId} this is city page</div>
-      {isData && <ShowData data={this.state.data} />}
+      {isData && <SearchData data={this.state.data} />}
       </div>
-      // <div>
-      // {isData && <ShowData />}
-      // </div>
     )
   }
 }
