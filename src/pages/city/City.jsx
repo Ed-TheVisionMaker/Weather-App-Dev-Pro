@@ -1,10 +1,8 @@
 import React from "react";
 import axios from "axios";
 
-
-
 const ShowData = (props) => {
-console.log(props.data.data.coord, "in show data")
+// console.log(props.data.data.coord, "in show data")
  return (
   <div>
   <div>{"something"}</div>
@@ -29,7 +27,7 @@ console.log(props.data.data.coord, "in show data")
 
 export default class City extends React.Component {
   state = {
-    data: {},
+    data: null,
     isLoading: false,
     isError: false
   };
@@ -69,16 +67,10 @@ export default class City extends React.Component {
 
   render() {
     const cityId = this.props.match.params.cityId;
-    const isData = this.state.data
-    console.log(isData, "state data from render, city page")
     return (
       <div>
       <div>{cityId} this is city page</div>
-      {isData && <ShowData data={this.state.data} />}
       </div>
-      // <div>
-      // {isData && <ShowData />}
-      // </div>
     )
   }
 }

@@ -9,8 +9,6 @@ import List from "./components/list/List";
 
 const Container = styled.div ``
 
-// const cities = ["london", "paris"]; // make this list dynamic, aka hate it as state in app
-
 const Nav = (props) => (
   <nav>
     <ul>
@@ -35,7 +33,6 @@ class App extends React.Component {
       userLat: "",
       userLong: ""
     },
-    
   };
 
   componentDidMount() {
@@ -70,8 +67,6 @@ class App extends React.Component {
       <Router>
         <Container>
           <List
-            // cities={this.state.cities}
-            // currentLocation={this.state.currentLocation}
             handleSubmit={this.handleSubmit}
             component={List}
           />
