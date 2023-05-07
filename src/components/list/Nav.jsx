@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-// import List from "./List";
+import { BrowserRouter as  Router, Switch, Route, Link } from "react-router-dom";
 
 export default class Nav extends React.Component {
   state = {
@@ -16,15 +15,10 @@ export default class Nav extends React.Component {
     e.preventDefault();
     const value = this.state.inputValue;
     this.setState({ inputValue: "", cities: [...this.state.cities, value] });
-    this.props.handleSubmit(value);
+    // this.props.handleSubmit(value);
+    console.log(this.state)
   };
-
-
-  // handleSubmit = (value) => {
-  //   const newCities = [...this.state.cities, value];
-  //   this.setState({ cities: newCities });
-  // };
-
+  
   handleRemove = (city) => {
     const newCities = this.state.cities.filter((element) => element !== city);
     this.setState({ cities: newCities });

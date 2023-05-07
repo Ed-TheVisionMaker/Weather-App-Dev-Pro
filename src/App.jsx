@@ -8,33 +8,8 @@ import Nav from "./components/list/Nav"
 
 const Container = styled.div ``
 class App extends React.Component {
-  state = {
-    cities: ["London", "Monaco"],
-    currentLocation: {
-      userLat: "",
-      userLong: ""
-    },
-  };
-
-  componentDidMount() {
-    this.getUserLocation();
-  }
-
-  getUserLocation = () => {
-    navigator.geolocation.watchPosition(
-      function (position) {
-       const lat = position.coords.latitude;
-       const long = position.coords.longitude;
-        // this.setState({ currentLocation.userLat: lat, currentLocation.userLong: long });
-      },
-      function (error) {
-        // console.error("Error code = " + error.code + " - " + error.message);
-      }
-    );
-  };
-
-
   render() {
+    console.log("app page is rendered")
     return (
       <Router>
         <Container>
