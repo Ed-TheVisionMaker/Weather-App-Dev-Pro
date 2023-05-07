@@ -1,40 +1,55 @@
 import React from "react";
-import List from "./List";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+// import List from "./List";
 
 export default class Nav extends React.Component {
-    state = {
+  state = {
+    inputValue: "",
     cities: ["London", "Monaco"],
-    };
+  };
 
-    handleSubmit = (value) => {
-        const newCities = [...this.state.cities, value];
-        this.setState({ cities: newCities });
-      };
-    
-    handleRemove = (city) => {
-        const newCities = this.state.cities.filter((element) => element !== city);
-        this.setState({ cities: newCities });
-      };
+  handleChange = (e) => {
+    this.setState({ inputValue: e.target.value });
+  };
 
-    render () {
-        return(
-            <>
-            <List handleSubmit={this.handleSubmit} component={List} />
-            <nav>
-            <ul>
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const value = this.state.inputValue;
+    this.setState({ inputValue: "", cities: [...this.state.cities, value] });
+    this.props.handleSubmit(value);
+  };
+
+
+  // handleSubmit = (value) => {
+  //   const newCities = [...this.state.cities, value];
+  //   this.setState({ cities: newCities });
+  // };
+
+  handleRemove = (city) => {
+    const newCities = this.state.cities.filter((element) => element !== city);
+    this.setState({ cities: newCities });
+  };
+
+  render() {
+    return (
+      <>
+        <form onSubmit={this.handleSubmit}>
+          <input onChange={this.handleChange} />
+        </form>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            {this.state.cities.map((city) => (
               <li>
-                <Link to="/" >Home</Link>
+                <Link to={`/city/${city}`}>{city} this is the link</Link>
+                <button onClick={() => this.handleRemove(city)}>Clear</button>
               </li>
-              {this.state.cities.map((city) => (
-                <li>
-                  <Link to={`/city/${city}`}>{city} this is the link</Link>
-                  <button onClick={() => this.handleRemove(city)}>Clear</button>
-                </li>
-              ))}
-            </ul>
-          </nav>
-          </>
-        )
-    }
+            ))}
+          </ul>
+        </nav>
+      </>
+    );
+  }
 }
