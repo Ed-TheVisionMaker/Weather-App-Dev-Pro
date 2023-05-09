@@ -4,16 +4,15 @@ import styled from "styled-components"
 
 import Home from "./pages/home/Home";
 import City from "./pages/city/City";
-import Nav from "./components/list/Nav"
+import SearchSelect from "./components/list/SearchSelect"
 
 const Container = styled.div ``
 class App extends React.Component {
   render() {
-    console.log("app page is rendered")
     return (
       <Router>
         <Container>
-          <Nav component={Nav}/>
+          <SearchSelect component={SearchSelect}/>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/city/:cityId" component={City}/>

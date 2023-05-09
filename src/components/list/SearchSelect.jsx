@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as  Router, Switch, Route, Link } from "react-router-dom";
 
-export default class Nav extends React.Component {
+export default class SearchSelect extends React.Component {
   state = {
     inputValue: "",
     cities: ["London", "Monaco"],

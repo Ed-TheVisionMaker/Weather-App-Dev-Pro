@@ -1,55 +1,60 @@
 import React from "react";
+import { geolocated } from "react-geolocated";
+import axios from "axios"
 
 // const Container = styled.div ``
 
+
 export default class Home extends React.Component {
   state = {
-      userLat: "",
-      userLong: "",
-      isLoading: false,
+    userData: null,
+    userLat: null,
+    userLong: null,
+    isLoading: false,
+    isErrorLocation: false,
+    isErrorData: false,
   };
 
-  // getUserLocation = () => {
-  //   navigator.geolocation.getCurrentPosition(
-  //     function (position) {
-  //      const lat = position.coords.latitude;
-  //      const long =  position.coords.longitude;
-  //      this.setState({ userLat: lat, userLong: long });
-  //      if (this.state.userLat !== lat || this.state.userLong !== long) {
-  //       console.log("if statement triggered")
-  //      }
-  //     },
-  //     function (error) {
-  //       alert("Please enable your location to be identified for the app to function")
-  //     }
-  //   );
-  // };
+  getUserLocation = () => {
+    try{
+      this.setState({isLoading: true})
+      navigator.geolocation.getCurrentPosition ((position) => {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+        this.setState({userLat: lat, userLong: long})
+        this.getUserData(lat, long);
+      })
+    } catch (error) {
+      // alert("Please enable your location to be used for the Weather App to function properly")
+      this.setState({isErrorLocation: true})
+    }
+  };
+
+
+  getUserData = async (lat, long) => {
+    try {
+      const apiKey = "360c24ca8f6f6c57345a7685b6ca7548";
+      const userData = await axios(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`)
+      this.setState({ userData: userData, isLoading: false})
+      } catch (error) {
+        console.log("Error retrieving weather data for current location", error.message)
+        this.setState({isErrorData: true})
+      }
+  };
 
   componentDidMount() {
-    // this.getUserLocation();
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        console.log(position, "position in home page")
-       const lat = position.coords.latitude;
-       const long = position.coords.longitude;
-       this.setState({ userLat: lat, userLong: long });
-       
-       if (this.state.userLat !== lat || this.state.userLong !== long) {
-       }
-      },
-      function (error) {
-        alert("Please enable your location to be identified for the app to function")
-      }
-    );
+    this.getUserLocation()
   }
 
+
   render() {
-    console.log(this.state, "state in home page")
+    const hasData = !this.state.isLoading && this.state.userData;
     return (
       <div>
-        <div>home this is home page</div>
-        (this.state.userLat && <div>{this.state.userLat}</this.state.userLat>)
+        <div>Current Location</div>
+        {hasData && <div>{this.state.userData.data.name}</div>}
+        <div></div>
       </div>
-    )
+    );
   }
 }
