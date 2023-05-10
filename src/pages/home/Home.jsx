@@ -1,9 +1,7 @@
 import React from "react";
-import { geolocated } from "react-geolocated";
-import axios from "axios"
+import axios from "axios";
 
 // const Container = styled.div ``
-
 
 export default class Home extends React.Component {
   state = {
@@ -16,37 +14,39 @@ export default class Home extends React.Component {
   };
 
   getUserLocation = () => {
-    try{
-      this.setState({isLoading: true})
-      navigator.geolocation.getCurrentPosition ((position) => {
+    try {
+      this.setState({ isLoading: true });
+      navigator.geolocation.getCurrentPosition((position) => {
         const lat = position.coords.latitude;
         const long = position.coords.longitude;
-        this.setState({userLat: lat, userLong: long})
+        this.setState({ userLat: lat, userLong: long });
         this.getUserData(lat, long);
-      })
+      });
     } catch (error) {
       // alert("Please enable your location to be used for the Weather App to function properly")
-      this.setState({isErrorLocation: true})
+      this.setState({ isErrorLocation: true });
     }
   };
-
 
   getUserData = async (lat, long) => {
     try {
       const apiKey = "360c24ca8f6f6c57345a7685b6ca7548";
-      const userData = await axios(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}`)
-      this.setState({ userData: userData, isLoading: false})
-      } catch (error) {
-        console.log("Error retrieving weather data for current location", error.message)
-        this.setState({isErrorData: true})
-      }
+      const userData = await axios(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`
+      );
+      this.setState({ userData: userData, isLoading: false });
+    } catch (error) {
+      console.log(
+        "Error retrieving weather data for current location",
+        error.message
+      );
+      this.setState({ isErrorData: true });
+    }
   };
 
   componentDidMount() {
-    console.log(this.props, "component DM home page")
     this.getUserLocation()
   }
-
 
   render() {
     const hasData = !this.state.isLoading && this.state.userData;

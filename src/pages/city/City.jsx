@@ -1,75 +1,75 @@
 import React from "react";
 import axios from "axios";
 
-const ShowData = (props) => {
-// console.log(props.data.data.coord, "in show data")
- return (
-  <div>
-  <div>{"something"}</div>
-  {/* <div>{props.data.data.base}</div> */}
-  </div>
- )
-  // if (this.state.data !== undefined) {
-  //   console.log("showData after if statement")
-  //   console.log("was called show data")
-  //   const cityId = this.props.match.params.cityId;
-  //   const weatherData = this.state.data
-  //   console.log(weatherData, "weather data")
-  //   return (
-  //     <div>
-  //     {/* <div>{cityId} this is city page</div> */}
-  //     {/* <div>{weatherData.coord.lat} and {weatherData.coord.lon}</div> */}
-  //     </div>
-  //   )
-  // }
-  
-}
+import DisplayData from "../../components/display/DisplayData"
 
 export default class City extends React.Component {
   state = {
     data: null,
     isLoading: false,
-    isError: false
+    isError: false,
+    recentCities: []
   };
 
-  getCityData = async (city) => {
-    try {
-      this.setState({ isLoading: true });
-      const apiKey = "360c24ca8f6f6c57345a7685b6ca7548";
-      const geoCodeUrl = await axios(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`
-      );
-      let cityLat;
-      let cityLong;
+    getCityData = async (city) => {
+      try {
+          this.setState({ isLoading: true });
+          const apiKey = "360c24ca8f6f6c57345a7685b6ca7548";
+          const geoCodeUrl = await axios(
+          `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`
+          );
+
+          let cityLat;
+          let cityLong;
       
-      geoCodeUrl.data.find(returnedCities => {
-        if (returnedCities.name === city) {
-          cityLat = returnedCities.lat;
-          cityLong = returnedCities.lon;
-        }
-        return (cityLat, cityLong)
-      })
+          geoCodeUrl.data.find(returnedCities => {
+            if (returnedCities.name === city) {
+                cityLat = returnedCities.lat;
+                cityLong = returnedCities.lon;
+              }
+            return (cityLat, cityLong);
+              })
   
-      const latLongUrl = await axios(`https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLong}&appid=${apiKey}`)
- 
-      this.setState({ data: latLongUrl})
-      // console.log(geoCodeUrl.data.lat, geoCodeUrl.data.lon, "data: city page")
-      } catch (error) {
-        console.log("error in API call, city page")
-      }
-    
-  };
+          const cityData = await axios(`https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLong}&appid=${apiKey}&units=metric`)
+              this.setState({ data: cityData, isLoading: false})
 
-  componentDidMount() {
+      } 
+        catch(error) {
+                  console.log("error in API call, city page");
+        };
+    };
+
+   componentDidMount() {
     const cityId = this.props.match.params.cityId;
     this.getCityData(cityId);
-  }
+      }
+
+    handleRecentCitiesData = (cityId) => {
+      const recentCitiesList = this.props.location.state.recentCities;
+      const recentCitiesObjects = this.state.recentCities;
+      const updatedCitiesObjects = recentCitiesObjects.filter(recentCityObj => {
+         if(recentCitiesList.includes(recentCityObj.recentCity)) {
+              return recentCityObj
+         };
+          this.setState({ recentCities: updatedCitiesObjects })
+        });
+        const data = this.state.data
+        if (!recentCitiesObjects.length) {
+          this.setState({recentCities: [{recentCity: cityId, recentData: data}]})
+        }
+        else if (recentCitiesObjects.length < 4) {
+            // this.setState({[...recentCities, {recentCity: cityId, recentData: newData}]});
+          }
+        }
 
   render() {
+    // console.log(this.state, "in the city page render")
     const cityId = this.props.match.params.cityId;
+    const hasData = !this.state.isLoading && this.state.data;
     return (
       <div>
       <div>{cityId} this is city page</div>
+      {hasData && <DisplayData data={this.state.data} cityId={cityId} recentCites={this.handleRecentCitiesData(cityId)}/>}
       </div>
     )
   }

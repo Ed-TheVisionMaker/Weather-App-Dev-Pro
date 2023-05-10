@@ -5,6 +5,7 @@ export default class SearchSelect extends React.Component {
   state = {
     inputValue: "",
     cities: ["London", "Monaco"],
+    recentCities: [],
   };
 
   handleChange = (e) => {
@@ -13,11 +14,32 @@ export default class SearchSelect extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const value = this.state.inputValue;
-    this.setState({ inputValue: "", cities: [...this.state.cities, value] });
-    // this.props.handleSubmit(value);
-    console.log(this.state);
+    const newCity = this.state.inputValue;
+    this.setState({ inputValue: "", cities: [...this.state.cities, newCity] });
+
   };
+
+  handleRecentCities = (city) => {
+    let existingCities = this.state.recentCities;
+    const isIncluded = existingCities.includes(city)
+    if (!existingCities.length) {
+      this.setState({ recentCities: [city] });
+    }
+    else if (existingCities.length < 4) {
+      if (!isIncluded) {
+        existingCities.push(city);
+        this.setState({ recentCities: existingCities});
+      }
+    }
+      else if (existingCities.length === 4) {
+        if (!isIncluded) {
+          existingCities.shift();
+          existingCities.push(city);
+          this.setState({ recentCities: existingCities})
+        }
+      }
+      // console.log(this.state.cities, "SS page, in handleRemainingCites function")
+    }
 
   handleRemove = (city) => {
     const newCities = this.state.cities.filter((element) => element !== city);
@@ -25,8 +47,8 @@ export default class SearchSelect extends React.Component {
   };
 
   render() {
+    console.log("search select component rendered")
     return (
-      <>
         <nav>
           <ul>
             <li>
@@ -39,13 +61,12 @@ export default class SearchSelect extends React.Component {
           <ul>
             {this.state.cities.map((city) => (
               <li>
-                <Link to={`/city/${city}`}>{city} this is the link</Link>
+                <Link onClick={() => this.handleRecentCities(city)} to={{pathname: `/city/${city}`, state: this.state}}>{city} this is the link</Link>
                 <button onClick={() => this.handleRemove(city)}>Clear</button>
               </li>
             ))}
           </ul>
         </nav>
-      </>
     );
   }
 }

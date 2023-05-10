@@ -5,6 +5,7 @@ import styled from "styled-components"
 import Home from "./pages/home/Home";
 import City from "./pages/city/City";
 import SearchSelect from "./components/list/SearchSelect"
+import DisplayData from "./components/display/DisplayData"
 
 const Container = styled.div ``
 class App extends React.Component {
