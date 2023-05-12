@@ -1,14 +1,19 @@
 import React from "react";
 
-const RecentLocation = (props) => (
-        <>
-        <div className="recentCitiesContainer">
-          <p className="recentLocation">{this.props.cityId}</p>
-          <p className="recentTemp"></p>
-          <div className="recentWeatherDescription"></div>
-        </div>
-      </>
-);
+const Description = (props) => {
+  console.log(props.weather, "element in display data")
+
+  // const weather = props.weather;
+  const mainWeather = props.weather.map(element => element.main)    
+  const descriptionWeather = props.weather.map(element => element.description);
+  
+  return (
+    <div>
+      <p>{mainWeather}</p>
+      <p>{descriptionWeather}</p>
+    </div>
+  )
+}
 
 export default class DisplayData extends React.Component {
 
@@ -22,16 +27,18 @@ export default class DisplayData extends React.Component {
         <div className="tempContainer">
           <div className="skyState"></div>
           <div className="temps">
-            <div className="mainTemp">{temp}</div>
+            <h3>Temps</h3>
+            <div className="mainTemp">Av. {temp}</div>
             <div className="maxMinTemps">
               <p className="maxTemp">Max {temp_max}</p>
               <p className="minTemp">Min {temp_min}</p>
             </div>
           </div>
-          <div className="location">{cityId}</div>
+          <div>
+            <Description weather={this.props.data.data.weather} />
+          </div>
         </div>
         <div>
-          {/* this will be local stats searches container */}
         </div>
         {/* Make these repeated sections below into a component */}
         <div className="weatherDetailsContainer">

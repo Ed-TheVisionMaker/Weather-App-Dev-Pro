@@ -8,7 +8,6 @@ export default class City extends React.Component {
     data: null,
     isLoading: false,
     isError: false,
-    // recentCities: []
   };
 
     getCityData = async (city) => {
@@ -52,27 +51,11 @@ export default class City extends React.Component {
       if(cityId !== prevCityId) this.getCityData(cityId);
     }
 
-    // handleRecentCitiesData = (cityId) => {
-    //   const recentCitiesList = this.props.location.state.recentCities;
-    //   const recentCitiesObjects = this.state.recentCities;
-    //   const updatedCitiesObjects = recentCitiesObjects.filter(recentCityObj => {
-    //      if(recentCitiesList.includes(recentCityObj.recentCity)) {
-    //           return recentCityObj
-    //      };
-    //       this.setState({ recentCities: updatedCitiesObjects })
-    //     });
-    //     const data = this.state.data
-    //     if (!recentCitiesObjects.length) {
-    //       this.setState({recentCities: [{recentCity: cityId, recentData: data}]})
-    //     }
-    //     else if (recentCitiesObjects.length < 4) {
-    //         // this.setState({[...recentCities, {recentCity: cityId, recentData: newData}]});
-    //       }
-    //     }
-
   render() {
+    console.log(this.state.data);
     const cityId = this.props.match.params.cityId;
     const hasData = !this.state.isLoading && this.state.data;
+    // console.log(hasData && this.state.data.data.weather, "has data city page")
     return (
       <div>
       <div>{cityId} this is city page</div>
