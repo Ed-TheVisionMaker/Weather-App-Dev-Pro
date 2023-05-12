@@ -38,7 +38,6 @@ export default class SearchSelect extends React.Component {
           this.setState({ recentCities: existingCities})
         }
       }
-      // console.log(this.state.cities, "SS page, in handleRemainingCites function")
     }
 
   handleRemove = (city) => {
@@ -47,7 +46,6 @@ export default class SearchSelect extends React.Component {
   };
 
   render() {
-    console.log("search select component rendered")
     return (
         <nav>
           <ul>

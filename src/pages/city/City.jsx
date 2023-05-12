@@ -8,7 +8,7 @@ export default class City extends React.Component {
     data: null,
     isLoading: false,
     isError: false,
-    recentCities: []
+    // recentCities: []
   };
 
     getCityData = async (city) => {
@@ -18,6 +18,7 @@ export default class City extends React.Component {
           const geoCodeUrl = await axios(
           `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`
           );
+          
 
           let cityLat;
           let cityLong;
@@ -36,6 +37,7 @@ export default class City extends React.Component {
       } 
         catch(error) {
                   console.log("error in API call, city page");
+                  console.error(error)
         };
     };
 
@@ -43,33 +45,38 @@ export default class City extends React.Component {
     const cityId = this.props.match.params.cityId;
     this.getCityData(cityId);
       }
+  
+    componentDidUpdate(prevProps) {
+      const cityId = this.props.match.params.cityId;
+      const prevCityId = prevProps.match.params.cityId;
+      if(cityId !== prevCityId) this.getCityData(cityId);
+    }
 
-    handleRecentCitiesData = (cityId) => {
-      const recentCitiesList = this.props.location.state.recentCities;
-      const recentCitiesObjects = this.state.recentCities;
-      const updatedCitiesObjects = recentCitiesObjects.filter(recentCityObj => {
-         if(recentCitiesList.includes(recentCityObj.recentCity)) {
-              return recentCityObj
-         };
-          this.setState({ recentCities: updatedCitiesObjects })
-        });
-        const data = this.state.data
-        if (!recentCitiesObjects.length) {
-          this.setState({recentCities: [{recentCity: cityId, recentData: data}]})
-        }
-        else if (recentCitiesObjects.length < 4) {
-            // this.setState({[...recentCities, {recentCity: cityId, recentData: newData}]});
-          }
-        }
+    // handleRecentCitiesData = (cityId) => {
+    //   const recentCitiesList = this.props.location.state.recentCities;
+    //   const recentCitiesObjects = this.state.recentCities;
+    //   const updatedCitiesObjects = recentCitiesObjects.filter(recentCityObj => {
+    //      if(recentCitiesList.includes(recentCityObj.recentCity)) {
+    //           return recentCityObj
+    //      };
+    //       this.setState({ recentCities: updatedCitiesObjects })
+    //     });
+    //     const data = this.state.data
+    //     if (!recentCitiesObjects.length) {
+    //       this.setState({recentCities: [{recentCity: cityId, recentData: data}]})
+    //     }
+    //     else if (recentCitiesObjects.length < 4) {
+    //         // this.setState({[...recentCities, {recentCity: cityId, recentData: newData}]});
+    //       }
+    //     }
 
   render() {
-    // console.log(this.state, "in the city page render")
     const cityId = this.props.match.params.cityId;
     const hasData = !this.state.isLoading && this.state.data;
     return (
       <div>
       <div>{cityId} this is city page</div>
-      {hasData && <DisplayData data={this.state.data} cityId={cityId} recentCites={this.handleRecentCitiesData(cityId)}/>}
+      {hasData && <DisplayData data={this.state.data} cityId={cityId} />}
       </div>
     )
   }

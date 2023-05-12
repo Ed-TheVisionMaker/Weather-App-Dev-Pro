@@ -31,13 +31,7 @@ export default class DisplayData extends React.Component {
           <div className="location">{cityId}</div>
         </div>
         <div>
-          this will be recent searches container
-          <div className="recentCitiesContainer">
-            <p className="recentLocation"></p>
-            <p className="recentTemp"></p>
-            <div className="recentWeatherDescription"></div>
-          </div>
-          <RecentLocation />
+          {/* this will be local stats searches container */}
         </div>
         {/* Make these repeated sections below into a component */}
         <div className="weatherDetailsContainer">
