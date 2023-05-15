@@ -5,8 +5,14 @@ import styled from "styled-components";
 
 import Home from "./pages/home/Home";
 import City from "./pages/city/City";
-import SearchSelect from "./components/list/SearchSelect";
-import DisplayData from "./components/display/DisplayData";
+import SearchSelect from "./components/searchSelect/SearchSelect";
+import DisplayData from "./components/displayData/DisplayData";
+import MainIcon from "./components/mainIcon/MainIcon";
+
+
+const Container = styled.div `
+  display: flex;
+`
 
 const GlobalStyling = createGlobalStyle`
 :root {
@@ -18,13 +24,16 @@ const GlobalStyling = createGlobalStyle`
   --bg-yellow: #fdf40d;
   --bg-orange: #e6830f;
   --bg-red: #e6290f;
-  --text-main: #000000;
-  --white: #f5f5f5;
+  --white: #ffffff;
   --black: #00000;
+  --blue: #273B7A;
+  --darkBlue: #121149;
+  --yellow: #FFC61B;
+  --darkYellow: #EAA22F;
 
-  color-scheme: light dark;
-  color: var(--text-main);
-  // background-image: linear-gradient(var(--bg-yellow));
+
+  color-scheme: twilight;
+  color: var(--white);
   background-color: var(--bg-yellow);
 
   font-synthesis: none;
@@ -46,7 +55,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -90,20 +98,34 @@ button:focus-visible {
 
 `
 
-
-const Container = styled.div `
+const InteractiveContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding-top: 40px;
+  background-image: linear-gradient(180deg, var(--darkBlue), var(--blue));
+  // border: 1px solid blue;
 `
+
+
+// const PageStyling = styled.div `
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: flex-start;
+// `
 
 
 class App extends React.Component {
   render() {
     return (
       <Router>
-        <Container>
           <GlobalStyling />
-          {/* <NavStyle /> */}
-          <SearchSelect component={SearchSelect}/>
+          <Container>
+          <InteractiveContainer>
+          <MainIcon />
+          <SearchSelect />
+          </InteractiveContainer>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/city/:cityId" component={City}/>

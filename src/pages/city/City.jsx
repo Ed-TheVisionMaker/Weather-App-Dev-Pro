@@ -1,66 +1,107 @@
 import React from "react";
 import axios from "axios";
+import styled from "styled-components";
 
-import DisplayData from "../../components/display/DisplayData"
+import LoadingDisplay from "../../components/loadingDisplay/LoadingDisplay";
+import DisplayData from "../../components/displayData/DisplayData";
+import ForecastCharts from "../../components/forecastCharts/ForecastCharts";
+
+const DisplayDataStyling = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  background-image: linear-gradient(90deg, var(--blue), var(--darkBlue));
+  padding: 0 25px;
+
+  .iconDiv {
+    display: flex;
+    align-items: center;
+  }
+
+  .displayIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-color: var(--white);
+    border-radius: 5px;
+    border: 3px solid var(--white);
+  }
+`;
 
 export default class City extends React.Component {
   state = {
     data: null,
+    forecastData: null,
+    dailyData: null,
     isLoading: false,
     isError: false,
   };
 
-    getCityData = async (city) => {
-      try {
-          this.setState({ isLoading: true });
-          const apiKey = "360c24ca8f6f6c57345a7685b6ca7548";
-          const geoCodeUrl = await axios(
-          `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`
-          );
-          
+  getCityData = async (city) => {
+    try {
+      this.setState({ isLoading: true });
+      const apiKey = "360c24ca8f6f6c57345a7685b6ca7548";
+      const geoCodeUrl = await axios(
+        `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`
+      );
 
-          let cityLat;
-          let cityLong;
-      
-          geoCodeUrl.data.find(returnedCities => {
-            if (returnedCities.name === city) {
-                cityLat = returnedCities.lat;
-                cityLong = returnedCities.lon;
-              }
-            return (cityLat, cityLong);
-              })
-  
-          const cityData = await axios(`https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLong}&appid=${apiKey}&units=metric`)
-              this.setState({ data: cityData, isLoading: false})
+      let cityLat;
+      let cityLong;
 
-      } 
-        catch(error) {
-                  console.log("error in API call, city page");
-                  console.error(error)
-        };
-    };
+      geoCodeUrl.data.find((returnedCities) => {
+        if (returnedCities.name === city) {
+          cityLat = returnedCities.lat;
+          cityLong = returnedCities.lon;
+        }
+        console.log(cityLat, cityLong)
+        return cityLat, cityLong;
+      });
 
-   componentDidMount() {
+      const forecastData = await axios (
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLong}&appid=${apiKey}&units=metric`
+        // `https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=360c24ca8f6f6c57345a7685b6ca7548`
+        );
+        this.setState({forecastData: forecastData})
+
+      const cityData = await axios(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLong}&appid=${apiKey}&units=metric`
+      );
+      this.setState({ data: cityData, isLoading: false });
+
+    } catch (error) {
+      console.log("error in API call, city page");
+      console.error(error);
+    }
+  };
+
+  componentDidMount() {
     const cityId = this.props.match.params.cityId;
     this.getCityData(cityId);
-      }
-  
-    componentDidUpdate(prevProps) {
-      const cityId = this.props.match.params.cityId;
-      const prevCityId = prevProps.match.params.cityId;
-      if(cityId !== prevCityId) this.getCityData(cityId);
-    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const cityId = this.props.match.params.cityId;
+    const prevCityId = prevProps.match.params.cityId;
+    if (cityId !== prevCityId) this.getCityData(cityId);
+  }
 
   render() {
-    console.log(this.state.data);
+    console.log(this.state.forecastData, "forecastData");
     const cityId = this.props.match.params.cityId;
+    const isLoading = this.state.isLoading;
     const hasData = !this.state.isLoading && this.state.data;
-    // console.log(hasData && this.state.data.data.weather, "has data city page")
+    const hasForecastData = !this.state.isLoading && this.state.forecastData;
     return (
-      <div>
-      <div>{cityId} this is city page</div>
-      {hasData && <DisplayData data={this.state.data} cityId={cityId} />}
-      </div>
-    )
+      <>
+        {isLoading && <LoadingDisplay />}
+        {hasData && (
+          <DisplayDataStyling>
+            <h2>The weather forecast for {cityId}</h2>
+            <DisplayData data={this.state.data} cityId={cityId} />
+          </DisplayDataStyling>
+        )}
+        {hasForecastData && <ForecastCharts data={this.state.forecastData}/>}
+      </>
+    );
   }
 }

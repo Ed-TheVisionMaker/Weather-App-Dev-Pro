@@ -1,7 +1,31 @@
 import React from "react";
 import axios from "axios";
+import styled from "styled-components";
 
-// const Container = styled.div ``
+import DisplayData from "../../components/displayData/DisplayData";
+import LoadingDisplay from "../../components/loadingDisplay/LoadingDisplay";
+
+const DisplayDataStyling = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-image: linear-gradient(90deg, var(--blue), var(--darkBlue));
+  padding: 0 25px;
+
+  .iconDiv {
+    display: flex;
+    align-items: center;
+  }
+
+  .displayIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-color: var(--white);
+    border-radius: 5px;
+    border: 3px solid var(--white);
+  }
+`
 
 export default class Home extends React.Component {
   state = {
@@ -45,17 +69,21 @@ export default class Home extends React.Component {
   };
 
   componentDidMount() {
-    this.getUserLocation()
+    this.getUserLocation();
   }
 
   render() {
     const hasData = !this.state.isLoading && this.state.userData;
+    const isLoading = this.state.isLoading;
     return (
-      <div>
-        <div>Current Location</div>
-        {hasData && <div>{this.state.userData.data.name}</div>}
-        <div></div>
-      </div>
+      <>
+      {isLoading && <LoadingDisplay />}
+      {hasData && (
+      <DisplayDataStyling>
+        <h2>The weather forecast for {this.state.userData.data.name}</h2>
+        <DisplayData data={this.state.userData} />     
+      </DisplayDataStyling>)}
+      </>
     );
   }
 }
