@@ -2,16 +2,15 @@ import React from "react";
 import styled from "styled-components";
 
 const DescriptionStyle = styled.div`
-  img {
-    width: 10px;
-    height: 10px;
-    border: 1px solid black;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
 
   .weatherIcon {
-    width: 10px;
-    height: 10px;
-    border: 1px solid blue;
+    width: 70px;
+    height: 70px;
+    padding-right: 20px;
   }
 `;
 
@@ -29,18 +28,16 @@ const descriptionChangeCase = (descriptionWeather) => {
       }
     }
     return descriptionWeather
-}
+};
 
 const Description = (props) => {
-//   const mainWeather = props.weather.map((element) => element.main);
-  let descriptionWeather = props.weather.map((element) => element.description);
-     descriptionWeather = descriptionChangeCase(descriptionWeather)
-
+  const descriptionWeather = props.weather.map((element) => element.description);
+  const iconId = props.weather.map((element) => element.icon)
+  const descriptionCaseCorrected = descriptionChangeCase(descriptionWeather);
   return (
     <DescriptionStyle>
-      <p>Weather icon not showing</p>
-      <img src="https://openweathermap.org/img/wn/10d@2x.png" />
-      <p>{descriptionWeather}</p>
+      <img className="weatherIcon" src={`https://openweathermap.org/img/wn/${iconId}@2x.png`} />
+      <p>{descriptionCaseCorrected}</p>
     </DescriptionStyle>
   );
 };

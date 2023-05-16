@@ -4,28 +4,35 @@ import styled from "styled-components";
 
 import DisplayData from "../../components/displayData/DisplayData";
 import LoadingDisplay from "../../components/loadingDisplay/LoadingDisplay";
+import ErrorDisplay from "../../components/ErrorDisplay/ErrorDisplay";
+import ErrorLocation from "../../components/ErrorLocation/ErrorLocation";
 
 const DisplayDataStyling = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: inherit;
   background-image: linear-gradient(90deg, var(--blue), var(--darkBlue));
   padding: 0 25px;
 
   .iconDiv {
     display: flex;
     align-items: center;
+    padding-bottom: 20px;
   }
 
   .displayIcon {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin-right: 10px;
     background-color: var(--white);
     border-radius: 5px;
     border: 3px solid var(--white);
   }
-`
+
+  .windDirectionIcon {
+    border-radius: 25px;
+  }
+`;
 
 export default class Home extends React.Component {
   state = {
@@ -35,6 +42,7 @@ export default class Home extends React.Component {
     isLoading: false,
     isErrorLocation: false,
     isErrorData: false,
+    currentUnits: "metric",
   };
 
   getUserLocation = () => {
@@ -47,10 +55,30 @@ export default class Home extends React.Component {
         this.getUserData(lat, long);
       });
     } catch (error) {
-      // alert("Please enable your location to be used for the Weather App to function properly")
-      this.setState({ isErrorLocation: true });
+      alert("Please enable your location to be used for the Weather App to function properly")
+      console.log("error caught in location")
+      this.setState({ isLoading: false, isErrorLocation: true });
     }
   };
+
+  // getUserLocation = () => {
+  //   let errorCaught;
+  //   this.setState({ isLoading: true });
+  //   navigator.geolocation.getCurrentPosition(
+  //     function (position) {
+  //       const lat = position.coords.latitude;
+  //       const long = position.coords.longitude;
+  //       this.setState({ userLat: lat, userLong: long });
+  //       this.getUserData(lat, long);
+  //     },
+  //     function (error) {
+  //       console.log("there is an error caught");
+  //       errorCaught = true;
+  //     }
+  //   );
+  //   console.log(errorCaught, "errorCaught variable in get user lcoation");
+  //   if (errorCaught) this.setState({ isLoading: false, isErrorLocation: true });
+  // };
 
   getUserData = async (lat, long) => {
     try {
@@ -64,8 +92,18 @@ export default class Home extends React.Component {
         "Error retrieving weather data for current location",
         error.message
       );
-      this.setState({ isErrorData: true });
+      this.setState({ isLoading: false, isErrorData: true });
     }
+  };
+
+  handleChangeUnits = () => {
+    if(this.state.currentUnits === "metric") {
+      this.setState({currentUnits: "imperial"})
+    }
+    else {
+      this.setState({currentUnits: "metric"})
+    }
+    this.getUserLocation();
   };
 
   componentDidMount() {
@@ -75,14 +113,20 @@ export default class Home extends React.Component {
   render() {
     const hasData = !this.state.isLoading && this.state.userData;
     const isLoading = this.state.isLoading;
+    const isErrorData = this.state.isErrorData;
+    const isErrorLocation = this.state.isErrorLocation;
+    console.log(isErrorLocation, "is error location variable");
     return (
       <>
-      {isLoading && <LoadingDisplay />}
-      {hasData && (
-      <DisplayDataStyling>
-        <h2>The weather forecast for {this.state.userData.data.name}</h2>
-        <DisplayData data={this.state.userData} />     
-      </DisplayDataStyling>)}
+        {isErrorLocation && <ErrorLocation />}
+        {isErrorData && <ErrorDisplay cityId={"your current location"} />}
+        {!isErrorData && !isErrorLocation && isLoading && <LoadingDisplay />}
+        {hasData && (
+          <DisplayDataStyling>
+            <h2>The weather forecast for {this.state.userData.data.name}</h2>
+            <DisplayData data={this.state.userData} handleChangeUnits={this.handleChangeUnits} currentUnits={this.state.currentUnits}/>
+          </DisplayDataStyling>
+        )}
       </>
     );
   }

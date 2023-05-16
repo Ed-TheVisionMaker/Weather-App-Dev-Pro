@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const NavStyle = styled.nav`
   margin: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +20,7 @@ const NavStyle = styled.nav`
   }
 `;
 
-const ListStyle = styled.ul`
+const ListStyleGlobal = styled.ul`
   width: inherit;
   margin: 0 auto;
   display: flex;
@@ -32,7 +33,7 @@ const ListStyle = styled.ul`
   li {
     display: flex;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
     width: 100%;
     list-style-type: none;
     box-sizing: border-box;
@@ -62,6 +63,24 @@ const ListStyle = styled.ul`
   }
 `;
 
+const ListStyledCities = styled.li`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+`;
+
+const ListStyledCurrentLocation = styled.li`
+  display: flex;
+  justify-content: center;
+
+`;
+
+const RemoveButtonStyled = styled.button`
+background-color: transparent;
+padding: 10px;
+`;
+
 export default class SearchSelect extends React.Component {
   state = {
     inputValue: "",
@@ -69,13 +88,22 @@ export default class SearchSelect extends React.Component {
   };
 
   handleChange = (e) => {
-    this.setState({ inputValue: e.target.value });
+    e.target.value.charAt(0).toUpperCase();
+    const FirstLetterUpperCase = e.target.value.charAt(0).toUpperCase();
+    const upperCaseAdded =
+      FirstLetterUpperCase + e.target.value.slice(1, e.target.value.length).toLowerCase();
+    this.setState({ inputValue: upperCaseAdded });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const newCity = this.state.inputValue;
-    this.setState({ inputValue: "", cities: [...this.state.cities, newCity] });
+    const cityDuplicated = this.state.cities.find((city) => city === newCity);
+    if (!cityDuplicated)
+      this.setState({
+        inputValue: "",
+        cities: [...this.state.cities, newCity],
+      });
   };
 
   handleRemove = (city) => {
@@ -84,18 +112,18 @@ export default class SearchSelect extends React.Component {
   };
 
   render() {
-    const svgTrashIcon = (
+    const svgDeleteIcon = (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         stroke="currentColor"
-        class="w-6 h-6"
+        className="w-6 h-6"
       >
         <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           d="M6 18L18 6M6 6l12 12"
         />
       </svg>
@@ -103,10 +131,10 @@ export default class SearchSelect extends React.Component {
     return (
       <>
         <NavStyle>
-          <ListStyle>
-            <li className="homeLink">
+          <ListStyleGlobal>
+            <ListStyledCurrentLocation className="homeLink">
               <Link to="/">Current Location</Link>
-            </li>
+            </ListStyledCurrentLocation>
             <form onSubmit={this.handleSubmit}>
               <input
                 onChange={this.handleChange}
@@ -114,16 +142,16 @@ export default class SearchSelect extends React.Component {
               />
             </form>
             {this.state.cities.map((city) => (
-              <li>
+              <ListStyledCities>
                 <Link to={{ pathname: `/city/${city}`, state: this.state }}>
                   {city}
                 </Link>
-                <button onClick={() => this.handleRemove(city)}>
-                  {svgTrashIcon}
-                </button>
-              </li>
+                <RemoveButtonStyled onClick={() => this.handleRemove(city)}>
+                  {svgDeleteIcon}
+                </RemoveButtonStyled>
+              </ListStyledCities>
             ))}
-          </ListStyle>
+          </ListStyleGlobal>
         </NavStyle>
       </>
     );

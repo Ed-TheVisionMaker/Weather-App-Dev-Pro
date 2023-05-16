@@ -11,9 +11,9 @@ const LoadingDisplayStyling = styled.div`
 
   .isLoadingContainer {
     position: absolute;
-    left: calc(50% - 140px);
+    left: 20%;
     // left: calc(50% - 50cqw);
-    top: calc(50% - 40px);
+    top: 20%;
 
     color: var(--black);
     font-size: 40px;

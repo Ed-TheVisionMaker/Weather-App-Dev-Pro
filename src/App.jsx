@@ -25,7 +25,7 @@ const GlobalStyling = createGlobalStyle`
   --bg-orange: #e6830f;
   --bg-red: #e6290f;
   --white: #ffffff;
-  --black: #00000;
+  --black: #000000;
   --blue: #273B7A;
   --darkBlue: #121149;
   --yellow: #FFC61B;
@@ -49,11 +49,12 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--darkYellow)
 }
 
 body {
   margin: 0;
+  padding: 0;
   display: flex;
   min-width: 320px;
   min-height: 100vh;
@@ -67,21 +68,16 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+// button:focus,
+// button:focus-visible {
+//   outline: 4px auto -webkit-focus-ring-color;
+// }
 
 // @media (prefers-color-scheme: light) {
 //   :root {
@@ -102,10 +98,8 @@ const InteractiveContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   padding-top: 40px;
   background-image: linear-gradient(180deg, var(--darkBlue), var(--blue));
-  // border: 1px solid blue;
 `
 
 

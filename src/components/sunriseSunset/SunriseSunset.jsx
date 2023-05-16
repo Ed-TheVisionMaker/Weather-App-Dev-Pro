@@ -1,4 +1,15 @@
 import React from "react";
+import styled from "styled-components";
+
+const DataSpanStyling = styled.span`
+  // padding-left: 30px;
+`;
+
+const DataContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
 
 const formatTime = (date) => {
   const hour = date.getHours();
@@ -24,11 +35,19 @@ const SunriseSunset = (props) => {
     <>
       <div className="sunrise iconDiv">
         <img className="displayIcon" src="https://i.ibb.co/9pqzZZK/sunrise-svgrepo-com.png" />
-        <p className="sunriseTime">Sunrise {sunriseTime}</p>
+        {/* <p className="sunriseTime">Sunrise {sunriseTime}</p> */}
+        <DataContainer>
+          Sunrise
+          <DataSpanStyling>{sunriseTime}</DataSpanStyling>
+        </DataContainer>
       </div>
       <div className="sunset iconDiv">
         <img className="displayIcon" src="https://i.ibb.co/LhcXF9K/sunset-svgrepo-com-1.png" />
-        <p className="sunsetTime">Sunset {sunsetTime}</p>
+        {/* <p className="sunsetTime">Sunset {sunsetTime}</p> */}
+        <DataContainer>
+          Sunset
+          <DataSpanStyling>{sunsetTime}</DataSpanStyling>
+        </DataContainer>
       </div>
     </>
   );
