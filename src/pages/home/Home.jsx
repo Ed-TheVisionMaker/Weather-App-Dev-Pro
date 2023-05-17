@@ -33,7 +33,6 @@ const DisplayDataStyling = styled.div`
     border-radius: 25px;
   }
 `;
-
 export default class Home extends React.Component {
   state = {
     userData: null,
@@ -46,39 +45,19 @@ export default class Home extends React.Component {
   };
 
   getUserLocation = () => {
-    try {
-      this.setState({ isLoading: true });
-      navigator.geolocation.getCurrentPosition((position) => {
+    this.setState({ isLoading: true });
+    navigator.geolocation.getCurrentPosition(
+       (position) => {
         const lat = position.coords.latitude;
         const long = position.coords.longitude;
         this.setState({ userLat: lat, userLong: long });
         this.getUserData(lat, long);
-      });
-    } catch (error) {
-      alert("Please enable your location to be used for the Weather App to function properly")
-      console.log("error caught in location")
-      this.setState({ isLoading: false, isErrorLocation: true });
-    }
+      },
+      (error) => {
+        this.setState({ isLoading: false, isErrorLocation: true })
+      }
+    );
   };
-
-  // getUserLocation = () => {
-  //   let errorCaught;
-  //   this.setState({ isLoading: true });
-  //   navigator.geolocation.getCurrentPosition(
-  //     function (position) {
-  //       const lat = position.coords.latitude;
-  //       const long = position.coords.longitude;
-  //       this.setState({ userLat: lat, userLong: long });
-  //       this.getUserData(lat, long);
-  //     },
-  //     function (error) {
-  //       console.log("there is an error caught");
-  //       errorCaught = true;
-  //     }
-  //   );
-  //   console.log(errorCaught, "errorCaught variable in get user lcoation");
-  //   if (errorCaught) this.setState({ isLoading: false, isErrorLocation: true });
-  // };
 
   getUserData = async (lat, long) => {
     try {
@@ -88,10 +67,6 @@ export default class Home extends React.Component {
       );
       this.setState({ userData: userData, isLoading: false });
     } catch (error) {
-      console.log(
-        "Error retrieving weather data for current location",
-        error.message
-      );
       this.setState({ isLoading: false, isErrorData: true });
     }
   };
@@ -103,7 +78,6 @@ export default class Home extends React.Component {
     else {
       this.setState({currentUnits: "metric"})
     }
-    this.getUserLocation();
   };
 
   componentDidMount() {
@@ -115,7 +89,6 @@ export default class Home extends React.Component {
     const isLoading = this.state.isLoading;
     const isErrorData = this.state.isErrorData;
     const isErrorLocation = this.state.isErrorLocation;
-    console.log(isErrorLocation, "is error location variable");
     return (
       <>
         {isErrorLocation && <ErrorLocation />}

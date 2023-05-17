@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const DataSpanStyling = styled.span`
-  
+// no styling needed
 `;
 
 const DataContainer = styled.div`
@@ -22,7 +22,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Av.
-          <DataSpanStyling>{temp}</DataSpanStyling>
+          <DataSpanStyling>{props.currentUnits === "metric" ? Math.round(temp) : Math.round((temp * 1.8) + 32)}</DataSpanStyling>
         </DataContainer>
       </div>
       <div className="maxTemp iconDiv">
@@ -32,7 +32,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Max
-          <DataSpanStyling>{temp_max}</DataSpanStyling>
+          <DataSpanStyling>{props.currentUnits === "metric" ? Math.round(temp_max) : Math.round((temp_max * 1.8) + 32)}</DataSpanStyling>
         </DataContainer>
       </div>
       <div className="minTemp iconDiv">
@@ -40,10 +40,9 @@ const Temperatures = (props) => {
           className="displayIcon"
           src="https://i.ibb.co/wKjP867/temperature-arrow-down-svgrepo-com.png"
         />
-        {/* <p>Min {temp_min}</p> */}
         <DataContainer>
           Min
-          <DataSpanStyling>{temp_min}</DataSpanStyling>
+          <DataSpanStyling>{props.currentUnits === "metric" ? Math.round(temp_min) : Math.round((temp_min * 1.8) + 32)}</DataSpanStyling>
         </DataContainer>
       </div>
       <div className="feelsLike iconDiv">
@@ -51,10 +50,9 @@ const Temperatures = (props) => {
           className="displayIcon"
           src="https://i.ibb.co/V3Mvqdq/temperature-feels-like-svgrepo-com-1.jpg"
         />
-        {/* <p>Feels Like {feels_like}</p> */}
         <DataContainer>
           Feels Like
-          <DataSpanStyling>{feels_like}</DataSpanStyling>
+          <DataSpanStyling>{props.currentUnits === "metric" ? Math.round(feels_like) : Math.round((feels_like * 1.8) + 32)}</DataSpanStyling>
         </DataContainer>
       </div>
       <div className="humidity iconDiv">
@@ -62,7 +60,6 @@ const Temperatures = (props) => {
           className="displayIcon"
           src="https://i.ibb.co/ZfXWk5L/humidity-svgrepo-com.png"
         />
-        {/* <p>Humidity {humidity}%</p> */}
         <DataContainer>
           Humidity
           <DataSpanStyling>{humidity}%</DataSpanStyling>

@@ -2,12 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const MainIconStyle = styled.div`
-
   .mainIcon {
     width: 100px;
     height: 100px;
   }
-
 `;
 
 const MainIcon = () => {

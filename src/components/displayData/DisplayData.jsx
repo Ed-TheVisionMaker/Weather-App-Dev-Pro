@@ -24,7 +24,7 @@ export default class DisplayData extends React.Component {
         <DataContainerStyling>
           <SunriseSunset data={this.props.data.data} />
           <UnitsButton currentUnits={this.props.currentUnits} handleChangeUnits={this.props.handleChangeUnits} />
-          <Temperatures temps={this.props.data.data.main} />
+          <Temperatures temps={this.props.data.data.main} currentUnits={this.props.currentUnits} />
           <Wind wind={this.props.data.data.wind} currentUnits={this.props.currentUnits}/>
         </DataContainerStyling>
       </>

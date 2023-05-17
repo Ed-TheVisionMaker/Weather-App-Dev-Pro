@@ -73,14 +73,12 @@ const ListStyledCities = styled.li`
 const ListStyledCurrentLocation = styled.li`
   display: flex;
   justify-content: center;
-
 `;
 
 const RemoveButtonStyled = styled.button`
 background-color: transparent;
 padding: 10px;
 `;
-
 export default class SearchSelect extends React.Component {
   state = {
     inputValue: "",
@@ -138,7 +136,7 @@ export default class SearchSelect extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <input
                 onChange={this.handleChange}
-                placeholder={"search for a city"}
+                placeholder={"type your city"}
               />
             </form>
             {this.state.cities.map((city) => (

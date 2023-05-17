@@ -10,13 +10,13 @@ const UnitsButtonContainer = styled.div`
 `;
 
 const UnitsButtonInstruction = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   padding-right: 20px;
 `;
 
 const UnitsButtonStyling = styled.button`
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 18px;
+  letter-spacing: 1.5px;
   padding: 5px 10px;
   background-color: var(--blue);
   color: white;
@@ -33,7 +33,7 @@ const UnitsButton = (props) => {
     <UnitsButtonContainer>
       <UnitsButtonInstruction>Current units:</UnitsButtonInstruction>
       <UnitsButtonStyling onClick={() => props.handleChangeUnits()}>
-        {props.currentUnits === "metric"? "Celcius" : "Fahrenheit"}
+        {props.currentUnits === "metric" ? "Celcius" : "Fahrenheit"}
       </UnitsButtonStyling>
     </UnitsButtonContainer>
   );

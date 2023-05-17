@@ -5,14 +5,10 @@ const LoadingDisplayStyling = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
 
   .isLoadingContainer {
     position: absolute;
     left: 20%;
-    // left: calc(50% - 50cqw);
     top: 20%;
 
     color: var(--black);
@@ -21,11 +17,11 @@ const LoadingDisplayStyling = styled.div`
 
   .isLoading {
     margin: auto;
-    border: 20px solid var(--darkBlue);
+    border: 10px solid var(--darkBlue);
     border-radius: 50%;
-    border-top: 20px solid var(--darkYellow);
-    width: 200px;
-    height: 200px;
+    border-top: 10px solid var(--darkYellow);
+    width: 50px;
+    height: 50px;
     animation: spinner 4s linear infinite;
   }
   

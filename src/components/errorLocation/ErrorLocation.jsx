@@ -10,8 +10,8 @@ const ErrorLocationStyling = styled.div`
 `;
 
 const ErrorLocationImage = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 50px;
+  height: 50px;
 `;
 
 const ErrorLocationMessage = styled.div`

@@ -33,7 +33,6 @@ const DisplayDataStyling = styled.div`
     border-radius: 25px;
   }
 `;
-
 export default class City extends React.Component {
   state = {
     data: null,
@@ -62,7 +61,7 @@ export default class City extends React.Component {
         }
         return cityLat, cityLong;
       });
-
+      //  API call for the 5 day, 3 hourly forecast for charts.
       // const forecastData = await axios (
       //   `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLong}&appid=${apiKey}&units=metric`
       //   );
@@ -73,9 +72,7 @@ export default class City extends React.Component {
       this.setState({ data: cityData, isLoading: false });
 
     } catch (error) {
-      console.log("error in API call, city page");
       this.setState({isError: true})
-      console.error(error.message, "error message");
     }
   };
 
@@ -86,8 +83,6 @@ export default class City extends React.Component {
     else {
       this.setState({currentUnits: "metric"})
     }
-    const cityId = this.props.match.params.cityId;
-    this.getCityData(cityId);
   };
 
   componentDidMount() {
@@ -106,7 +101,6 @@ export default class City extends React.Component {
     const isLoading = this.state.isLoading;
     const isError = this.state.isError;
     const hasData = !this.state.isLoading && this.state.data;
-    const hasForecastData = !this.state.isLoading && this.state.forecastData;
     return (
       <>
         {isError && <ErrorDisplay cityId={cityId} />}
@@ -117,7 +111,6 @@ export default class City extends React.Component {
             <DisplayData data={this.state.data} cityId={cityId} handleChangeUnits={this.handleChangeUnits} currentUnits={this.state.currentUnits}/>
           </DisplayDataStyling>
         )}
-        {/* {hasForecastData && <ForecastCharts data={this.state.forecastData}/>} */}
       </>
     );
   }

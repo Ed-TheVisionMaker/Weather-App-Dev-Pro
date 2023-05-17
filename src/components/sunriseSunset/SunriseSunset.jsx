@@ -35,7 +35,6 @@ const SunriseSunset = (props) => {
     <>
       <div className="sunrise iconDiv">
         <img className="displayIcon" src="https://i.ibb.co/9pqzZZK/sunrise-svgrepo-com.png" />
-        {/* <p className="sunriseTime">Sunrise {sunriseTime}</p> */}
         <DataContainer>
           Sunrise
           <DataSpanStyling>{sunriseTime}</DataSpanStyling>
@@ -43,7 +42,6 @@ const SunriseSunset = (props) => {
       </div>
       <div className="sunset iconDiv">
         <img className="displayIcon" src="https://i.ibb.co/LhcXF9K/sunset-svgrepo-com-1.png" />
-        {/* <p className="sunsetTime">Sunset {sunsetTime}</p> */}
         <DataContainer>
           Sunset
           <DataSpanStyling>{sunsetTime}</DataSpanStyling>

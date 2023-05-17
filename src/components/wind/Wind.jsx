@@ -1,26 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const WindDirectionDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  p {
-    display: flex;
-    align-items: center;
-    padding-right: 10px;
-  }
-
-  .windDirectionIcon {
-    width: 25px;
-    height: 25px;
-    background-color: var(--white);
-    padding: 5px;
-    border-radius: 25px;
-  }
-`;
-
 const WindDirectionIcon = styled.img`
 width: 25px;
 height: 25px;
@@ -40,9 +20,9 @@ const DataContainer = styled.div`
   justify-content: space-between;
 `;
 
-
 const Wind = (props) => {
   const { speed, deg } = props.wind;
+  const toMph = 2.2369362920544;
   return (
     <>
       <div className="windSpeed iconDiv">
@@ -53,7 +33,7 @@ const Wind = (props) => {
         <DataContainer>
           Wind Speed
           {props.currentUnits === "metric" && <DataSpanStyling>{speed}m/s</DataSpanStyling>}
-          {props.currentUnits === "imperial" && <DataSpanStyling>{speed}mph</DataSpanStyling>}
+          {props.currentUnits === "imperial" && <DataSpanStyling>{(speed * toMph).toFixed(2)}mph</DataSpanStyling>}
         </DataContainer>
       </div>
       <div className="windDirection iconDiv">
