@@ -9,7 +9,6 @@ const NavStyle = styled.nav`
   flex-direction: column;
   align-items: center;
   padding: 40px 20px 0px;
-  // background-image: linear-gradient(180deg, var(--bg-yellow), var(--bg-orange));
   background-color: transparent;
 
   input {
@@ -33,11 +32,9 @@ const ListStyleGlobal = styled.ul`
   li {
     display: flex;
     align-items: center;
-    // justify-content: center;
     width: 100%;
     list-style-type: none;
     box-sizing: border-box;
-    // padding-left: 25px;
     border-bottom: 2px dotted var(--darkBlue);
   }
 
@@ -86,10 +83,9 @@ export default class SearchSelect extends React.Component {
   };
 
   handleChange = (e) => {
-    e.target.value.charAt(0).toUpperCase();
-    const FirstLetterUpperCase = e.target.value.charAt(0).toUpperCase();
+    const firstLetterUpperCase = e.target.value.charAt(0).toUpperCase();
     const upperCaseAdded =
-      FirstLetterUpperCase + e.target.value.slice(1, e.target.value.length).toLowerCase();
+      firstLetterUpperCase + e.target.value.slice(1, e.target.value.length).toLowerCase();
     this.setState({ inputValue: upperCaseAdded });
   };
 
@@ -110,22 +106,6 @@ export default class SearchSelect extends React.Component {
   };
 
   render() {
-    const svgDeleteIcon = (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
-        className="w-6 h-6"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      </svg>
-    );
     return (
       <>
         <NavStyle>
@@ -141,11 +121,24 @@ export default class SearchSelect extends React.Component {
             </form>
             {this.state.cities.map((city) => (
               <ListStyledCities>
-                <Link to={{ pathname: `/city/${city}`, state: this.state }}>
+                <Link key={city} to={{ pathname: `/city/${city}`, state: this.state }}>
                   {city}
                 </Link>
                 <RemoveButtonStyled onClick={() => this.handleRemove(city)}>
-                  {svgDeleteIcon}
+                <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="currentColor"
+        className="w-6 h-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
                 </RemoveButtonStyled>
               </ListStyledCities>
             ))}

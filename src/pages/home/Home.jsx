@@ -2,8 +2,8 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import DisplayData from "../../components/displayData/DisplayData";
-import LoadingDisplay from "../../components/loadingDisplay/LoadingDisplay";
+import DisplayData from "../../components/DisplayData/DisplayData";
+import LoadingDisplay from "../../components/LoadingDisplay/LoadingDisplay";
 import ErrorDisplay from "../../components/ErrorDisplay/ErrorDisplay";
 import ErrorLocation from "../../components/ErrorLocation/ErrorLocation";
 
@@ -73,10 +73,10 @@ export default class Home extends React.Component {
 
   handleChangeUnits = () => {
     if(this.state.currentUnits === "metric") {
-      this.setState({currentUnits: "imperial"})
+      this.setState({ currentUnits: "imperial" })
     }
     else {
-      this.setState({currentUnits: "metric"})
+      this.setState({ currentUnits: "metric" })
     }
   };
 

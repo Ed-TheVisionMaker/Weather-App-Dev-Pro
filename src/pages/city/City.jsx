@@ -2,9 +2,9 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import LoadingDisplay from "../../components/loadingDisplay/LoadingDisplay";
+import LoadingDisplay from "../../components/LoadingDisplay/LoadingDisplay";
 import ErrorDisplay from "../../components/ErrorDisplay/ErrorDisplay";
-import DisplayData from "../../components/displayData/DisplayData";
+import DisplayData from "../../components/DisplayData/DisplayData";
 // import ForecastCharts from "../../components/forecastCharts/ForecastCharts";
 
 const DisplayDataStyling = styled.div`
@@ -65,23 +65,23 @@ export default class City extends React.Component {
       // const forecastData = await axios (
       //   `https://api.openweathermap.org/data/2.5/forecast?lat=${cityLat}&lon=${cityLong}&appid=${apiKey}&units=metric`
       //   );
-      //   this.setState({forecastData: forecastData})
+      //   this.setState( {forecastData: forecastData} )
 
       const cityData = await axios(`https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLong}&appid=${apiKey}&units=${this.state.currentUnits}`);
       console.log(cityData)
       this.setState({ data: cityData, isLoading: false });
 
     } catch (error) {
-      this.setState({isError: true})
+      this.setState({ isError: true })
     }
   };
 
   handleChangeUnits = () => {
     if(this.state.currentUnits === "metric") {
-      this.setState({currentUnits: "imperial"})
+      this.setState({ currentUnits: "imperial" })
     }
     else {
-      this.setState({currentUnits: "metric"})
+      this.setState({ currentUnits: "metric" })
     }
   };
 

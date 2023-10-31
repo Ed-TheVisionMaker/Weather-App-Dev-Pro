@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-const DataSpanStyling = styled.span`
-// no styling needed
-`;
 
 const DataContainer = styled.div`
   width: 100%;
@@ -32,7 +29,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Max
-          <DataSpanStyling>{props.currentUnits === "metric" ? Math.round(temp_max) : Math.round((temp_max * 1.8) + 32)}</DataSpanStyling>
+          <span>{props.currentUnits === "metric" ? Math.round(temp_max) : Math.round((temp_max * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="minTemp iconDiv">
@@ -42,7 +39,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Min
-          <DataSpanStyling>{props.currentUnits === "metric" ? Math.round(temp_min) : Math.round((temp_min * 1.8) + 32)}</DataSpanStyling>
+          <span>{props.currentUnits === "metric" ? Math.round(temp_min) : Math.round((temp_min * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="feelsLike iconDiv">
@@ -52,7 +49,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Feels Like
-          <DataSpanStyling>{props.currentUnits === "metric" ? Math.round(feels_like) : Math.round((feels_like * 1.8) + 32)}</DataSpanStyling>
+          <span>{props.currentUnits === "metric" ? Math.round(feels_like) : Math.round((feels_like * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="humidity iconDiv">
@@ -62,7 +59,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Humidity
-          <DataSpanStyling>{humidity}%</DataSpanStyling>
+          <span>{humidity}%</span>
         </DataContainer>
       </div>
     </>

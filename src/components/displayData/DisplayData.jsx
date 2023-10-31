@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 import Description from "../description/Description";
-import SunriseSunset from "../sunriseSunset/SunriseSunset";
-import Temperatures from "../temperatures/Temperatures";
-import Wind from "../wind/Wind";
-import UnitsButton from "../unitsButton/UnitsButton";
+import SunriseSunset from "../SunriseSunset/SunriseSunset";
+import Temperatures from "../Temperatures/Temperatures";
+import Wind from "../Wind/Wind";
+import UnitsButton from "../UnitsButton/UnitsButton";
 
 const DataContainerStyling = styled.div`
   width: 80%;

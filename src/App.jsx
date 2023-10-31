@@ -3,12 +3,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
 
-import Home from "./pages/home/Home";
-import City from "./pages/city/City";
-import SearchSelect from "./components/searchSelect/SearchSelect";
-import DisplayData from "./components/displayData/DisplayData";
-import MainIcon from "./components/mainIcon/MainIcon";
-
+import Home from "./pages/Home/Home";
+import City from "./pages/City/City";
+import SearchSelect from "./components/SearchSelect/SearchSelect";
+import DisplayData from "./components/DisplayData/DisplayData";
+import MainIcon from "./components/MainIcon/MainIcon";
 
 const Container = styled.div `
   display: flex;
@@ -21,9 +20,6 @@ const GlobalStyling = createGlobalStyle`
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  --bg-yellow: #fdf40d;
-  --bg-orange: #e6830f;
-  --bg-red: #e6290f;
   --white: #ffffff;
   --black: #000000;
   --blue: #273B7A;
@@ -34,7 +30,7 @@ const GlobalStyling = createGlobalStyle`
 
   color-scheme: twilight;
   color: var(--white);
-  background-color: var(--bg-yellow);
+  background-color: var(--yellow);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -74,24 +70,6 @@ button {
 button:hover {
   border-color: #646cff;
 }
-// button:focus,
-// button:focus-visible {
-//   outline: 4px auto -webkit-focus-ring-color;
-// }
-
-// @media (prefers-color-scheme: light) {
-//   :root {
-//     color: #213547;
-//     background-color: #ffffff;
-//   }
-//   a:hover {
-//     color: #747bff;
-//   }
-//   button {
-//     background-color: #f9f9f9;
-//   }
-// }
-
 `
 
 const InteractiveContainer = styled.div`
@@ -102,32 +80,22 @@ const InteractiveContainer = styled.div`
   background-image: linear-gradient(180deg, var(--darkBlue), var(--blue));
 `
 
-
-// const PageStyling = styled.div `
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: flex-start;
-// `
-
-
-class App extends React.Component {
-  render() {
-    return (
-      <Router>
-          <GlobalStyling />
-          <Container>
-          <InteractiveContainer>
-          <MainIcon />
-          <SearchSelect />
-          </InteractiveContainer>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/city/:cityId" component={City}/>
-          </Switch>
-        </Container>
-      </Router>
-    );
-  }
+function App() {
+  return (
+    <Router>
+        <GlobalStyling />
+        <Container>
+        <InteractiveContainer>
+        <MainIcon />
+        <SearchSelect />
+        </InteractiveContainer>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/city/:cityId" component={City}/>
+        </Switch>
+      </Container>
+    </Router>
+  );
 }
 
 export default App;
