@@ -61,7 +61,7 @@ export default class Home extends React.Component {
 
   getUserData = async (lat, long) => {
     try {
-      const apiKey = "360c24ca8f6f6c57345a7685b6ca7548";
+      const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
       const userData = await axios(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`
       );

@@ -19,7 +19,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Av.
-          <DataSpanStyling>{props.currentUnits === "metric" ? Math.round(temp) : Math.round((temp * 1.8) + 32)}</DataSpanStyling>
+          <span>{props.currentUnits === "metric" ? Math.round(temp) : Math.round((temp * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="maxTemp iconDiv">
