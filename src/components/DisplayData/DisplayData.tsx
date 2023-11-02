@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import Description from "../description/Description";
-import SunriseSunset from "../SunriseSunset/SunriseSunset";
+import Description from "../Description";
+import SunriseSunset from "../SunriseSunset";
 import Temperatures from "../Temperatures/Temperatures";
 import Wind from "../Wind/Wind";
 import UnitsButton from "../UnitsButton/UnitsButton";

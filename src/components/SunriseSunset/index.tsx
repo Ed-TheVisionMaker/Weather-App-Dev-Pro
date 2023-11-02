@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { SunriseSunsetProps } from "./SunriseSunset.interface";
 
 const DataSpanStyling = styled.span`
   // padding-left: 30px;
@@ -11,7 +12,7 @@ const DataContainer = styled.div`
   justify-content: space-between;
 `;
 
-const formatTime = (date) => {
+const formatTime = (date: Date) => {
   const hour = date.getHours();
   const minutes = date.getMinutes();
   const displayTime =
@@ -21,7 +22,8 @@ const formatTime = (date) => {
   return displayTime;
 };
 
-const SunriseSunset = (props) => {
+const SunriseSunset = (props: SunriseSunsetProps) => {
+  console.log(props, "sunrise sunset")
   const timeZone = props.data.timezone;
   const sunriseTimeStamp = props.data.sys.sunrise;
   const sunsetTimeStamp = props.data.sys.sunset;

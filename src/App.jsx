@@ -6,7 +6,6 @@ import styled from "styled-components";
 import Home from "./pages/Home/Home";
 import City from "./pages/City/City";
 import SearchSelect from "./components/SearchSelect/SearchSelect";
-import DisplayData from "./components/DisplayData/DisplayData";
 import MainIcon from "./components/MainIcon/MainIcon";
 
 const Container = styled.div `

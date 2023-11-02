@@ -5,7 +5,6 @@ import styled from "styled-components";
 import LoadingDisplay from "../../components/LoadingDisplay/LoadingDisplay";
 import ErrorDisplay from "../../components/ErrorDisplay/ErrorDisplay";
 import DisplayData from "../../components/DisplayData/DisplayData";
-// import ForecastCharts from "../../components/forecastCharts/ForecastCharts";
 
 const DisplayDataStyling = styled.div`
   display: flex;
@@ -97,6 +96,7 @@ export default class City extends React.Component {
   }
 
   render() {
+    // destructure data to necessary objects to simplify interfaces for TS
     const cityId = this.props.match.params.cityId;
     const isLoading = this.state.isLoading;
     const isError = this.state.isError;

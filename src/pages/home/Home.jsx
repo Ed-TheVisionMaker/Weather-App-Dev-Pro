@@ -85,6 +85,7 @@ export default class Home extends React.Component {
   }
 
   render() {
+    // destructure data to necessary objects to simplify interfaces for TS
     const hasData = !this.state.isLoading && this.state.userData;
     const isLoading = this.state.isLoading;
     const isErrorData = this.state.isErrorData;

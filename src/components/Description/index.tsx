@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { DescriptionProps } from "./Description.interface";
 
 const DescriptionStyle = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const DescriptionStyle = styled.div`
   }
 `;
 
-const descriptionChangeCase = (descriptionWeather) => {
+const descriptionChangeCase = (descriptionWeather :string) => {
     descriptionWeather = descriptionWeather.toString();
     for (let i = 0; i < descriptionWeather.length; i++) {
       descriptionWeather =
@@ -30,13 +31,13 @@ const descriptionChangeCase = (descriptionWeather) => {
     return descriptionWeather
 };
 
-const Description = (props) => {
-  const descriptionWeather = props.weather.map((element) => element.description);
-  const iconId = props.weather.map((element) => element.icon)
-  const descriptionCaseCorrected = descriptionChangeCase(descriptionWeather);
+const Description = ({weather}: DescriptionProps ) => {
+  console.log(weather[0].description, "weather")
+  const { description, icon} = weather[0]
+  const descriptionCaseCorrected = descriptionChangeCase(description);
   return (
     <DescriptionStyle>
-      <img className="weatherIcon" src={`https://openweathermap.org/img/wn/${iconId}@2x.png`} />
+      <img className="weatherIcon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />
       <p>{descriptionCaseCorrected}</p>
     </DescriptionStyle>
   );
