@@ -23,13 +23,16 @@ const formatTime = (date: Date) => {
 };
 
 const SunriseSunset = (props: SunriseSunsetProps) => {
-  console.log(props, "sunrise sunset")
-  const timeZone = props.data.timezone;
+  // SunriseSunset
+  // timezone number
+  // sys.sunset
+  // sys.sunrise
+  const timezone = props.data.timezone;
   const sunriseTimeStamp = props.data.sys.sunrise;
   const sunsetTimeStamp = props.data.sys.sunset;
   const toMilliseconds = 1000;
-  const sunriseDate = new Date((sunriseTimeStamp + timeZone) * toMilliseconds);
-  const sunsetDate = new Date((sunsetTimeStamp + timeZone) * toMilliseconds);
+  const sunriseDate = new Date((sunriseTimeStamp + timezone) * toMilliseconds);
+  const sunsetDate = new Date((sunsetTimeStamp + timezone) * toMilliseconds);
   const sunriseTime = formatTime(sunriseDate);
   const sunsetTime = formatTime(sunsetDate);
 

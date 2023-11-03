@@ -1,3 +1,5 @@
 export interface SunriseSunsetProps {
-    data: {};
+    timeZone: number,
+    sunrise: number,
+    sunset: number
 }

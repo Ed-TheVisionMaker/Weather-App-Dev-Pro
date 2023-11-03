@@ -67,7 +67,6 @@ export default class City extends React.Component {
       //   this.setState( {forecastData: forecastData} )
 
       const cityData = await axios(`https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLong}&appid=${apiKey}&units=${this.state.currentUnits}`);
-      console.log(cityData)
       this.setState({ data: cityData, isLoading: false });
 
     } catch (error) {

@@ -47,14 +47,14 @@ export default class Home extends React.Component {
   getUserLocation = () => {
     this.setState({ isLoading: true });
     navigator.geolocation.getCurrentPosition(
-       (position) => {
+      (position) => {
         const lat = position.coords.latitude;
         const long = position.coords.longitude;
         this.setState({ userLat: lat, userLong: long });
         this.getUserData(lat, long);
       },
       (error) => {
-        this.setState({ isLoading: false, isErrorLocation: true })
+        this.setState({ isLoading: false, isErrorLocation: true });
       }
     );
   };
@@ -72,11 +72,10 @@ export default class Home extends React.Component {
   };
 
   handleChangeUnits = () => {
-    if(this.state.currentUnits === "metric") {
-      this.setState({ currentUnits: "imperial" })
-    }
-    else {
-      this.setState({ currentUnits: "metric" })
+    if (this.state.currentUnits === "metric") {
+      this.setState({ currentUnits: "imperial" });
+    } else {
+      this.setState({ currentUnits: "metric" });
     }
   };
 
@@ -86,6 +85,15 @@ export default class Home extends React.Component {
 
   render() {
     // destructure data to necessary objects to simplify interfaces for TS
+    // copy this to the city
+    // look at extends option to build up the Display Data prop from all the others.
+    const { temp, feels_like, temp_min, temp_max, pressure, humidity } =
+      this.state.userData?.data?.main ?? {};
+    const timezone = this.state.userData?.data?.timezone;
+    const { sunrise, sunset } = this.state.userData?.data?.sys ?? {};
+    const { id, description } = this.state.userData?.data?.weather[0] ?? {};
+    const { speed, deg } = this.state.userData?.data.wind ?? {};
+
     const hasData = !this.state.isLoading && this.state.userData;
     const isLoading = this.state.isLoading;
     const isErrorData = this.state.isErrorData;
@@ -98,7 +106,11 @@ export default class Home extends React.Component {
         {hasData && (
           <DisplayDataStyling>
             <h2>The weather forecast for {this.state.userData.data.name}</h2>
-            <DisplayData data={this.state.userData} handleChangeUnits={this.handleChangeUnits} currentUnits={this.state.currentUnits}/>
+            <DisplayData
+              data={this.state.userData}
+              handleChangeUnits={this.handleChangeUnits}
+              currentUnits={this.state.currentUnits}
+            />
           </DisplayDataStyling>
         )}
       </>
