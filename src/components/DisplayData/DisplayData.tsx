@@ -3,9 +3,10 @@ import styled from "styled-components";
 
 import Description from "../Description";
 import SunriseSunset from "../SunriseSunset";
-import Temperatures from "../Temperatures/Temperatures";
-import Wind from "../Wind/Wind";
-import UnitsButton from "../UnitsButton/UnitsButton";
+import Temperatures from "../Temperatures";
+import Wind from "../Wind";
+import UnitsButton from "../UnitsButton";
+import { DisplayDataProps } from "./DisplayData.interfaces";
 
 const DataContainerStyling = styled.div`
   width: 80%;
@@ -15,17 +16,44 @@ const DataContainerStyling = styled.div`
   padding: 30px 10px;
 `;
 
-export default class DisplayData extends React.Component {
+export default class DisplayData extends React.Component<DisplayDataProps> {
   render() {
-    const cityId = this.props.cityId;
+    // const cityId = this.props.cityId;
+    console.log(this.props?.data, "this.props.data");
+    // const {description, icon} = this.props.data
+    const { data, handleChangeUnits, currentUnits } = this.props;
+    const {
+      description,
+      icon,
+      temps,
+      timezone,
+      sunrise,
+      sunset,
+      wind,
+
+    } = data;
+
     return (
       <>
-        <Description weather={this.props.data.data.weather} />
+        <Description description={description} icon={icon} />
         <DataContainerStyling>
-          <SunriseSunset data={this.props.data.data} />
-          <UnitsButton currentUnits={this.props.currentUnits} handleChangeUnits={this.props.handleChangeUnits} />
-          <Temperatures temps={this.props.data.data.main} currentUnits={this.props.currentUnits} />
-          <Wind wind={this.props.data.data.wind} currentUnits={this.props.currentUnits}/>
+          <SunriseSunset
+            timezone={timezone}
+            sunrise={sunrise}
+            sunset={sunset}
+          />
+          <UnitsButton
+            currentUnits={currentUnits}
+            handleChangeUnits={handleChangeUnits}
+          />
+          <Temperatures
+            temps={temps}
+            currentUnits={this.props.currentUnits}
+          />
+          <Wind
+            wind={wind}
+            currentUnits={this.props.currentUnits}
+          />
         </DataContainerStyling>
       </>
     );

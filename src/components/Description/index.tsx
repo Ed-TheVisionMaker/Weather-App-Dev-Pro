@@ -31,8 +31,7 @@ const descriptionChangeCase = (descriptionWeather :string) => {
     return descriptionWeather
 };
 
-const Description = ({weather}: DescriptionProps ) => {
-  const { description, icon} = weather[0]
+const Description = ({description, icon}: DescriptionProps ) => {
   const descriptionCaseCorrected = descriptionChangeCase(description);
   return (
     <DescriptionStyle>

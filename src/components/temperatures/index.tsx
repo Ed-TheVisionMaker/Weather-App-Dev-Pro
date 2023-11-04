@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { TemperaturesProps } from "./Temperatures.interaces";
 
 
 const DataContainer = styled.div`
@@ -8,8 +9,10 @@ const DataContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Temperatures = (props) => {
+const Temperatures = (props: TemperaturesProps) => {
   const { temp, temp_min, temp_max, feels_like, humidity } = props.temps;
+  const currentUnits = props.currentUnits
+  console.log(currentUnits, "currentUnits in Temps")
   return (
     <>
       <div className="averageTemp iconDiv">
@@ -19,7 +22,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Av.
-          <span>{props.currentUnits === "metric" ? Math.round(temp) : Math.round((temp * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(temp) : Math.round((temp * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="maxTemp iconDiv">
