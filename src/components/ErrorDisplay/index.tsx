@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { ErrorDisplayProps } from './ErrorDisplay.interface';
 
 const ErrorDisplayStyling = styled.div`
     display: flex;
@@ -19,11 +20,11 @@ const ErrorMessage = styled.div`
     color: var(--darkBlue);
 `
 
-const ErrorDisplay = (props) => {
+const ErrorDisplay = ({cityId}: ErrorDisplayProps) => {
     return (
         <ErrorDisplayStyling>
             <ErrorImage src="https://openweathermap.org/img/wn/11d@2x.png" />
-            <ErrorMessage>The weather for {props.cityId} could not be found</ErrorMessage>
+            <ErrorMessage>The weather for {cityId} could not be found</ErrorMessage>
         </ErrorDisplayStyling>
     )
 

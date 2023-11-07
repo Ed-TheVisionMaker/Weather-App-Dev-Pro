@@ -3,8 +3,8 @@ import axios from "axios";
 import styled from "styled-components";
 
 import DisplayData from "../../components/DisplayData/DisplayData";
-import LoadingDisplay from "../../components/LoadingDisplay/LoadingDisplay";
-import ErrorDisplay from "../../components/ErrorDisplay/ErrorDisplay";
+import LoadingDisplay from "../../components/LoadingDisplay";
+import ErrorDisplay from "../../components/ErrorDisplay";
 import ErrorLocation from "../../components/ErrorLocation/ErrorLocation";
 
 const DisplayDataStyling = styled.div`

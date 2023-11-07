@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, {ChangeEvent, FormEvent } from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 
 const NavStyle = styled.nav`
@@ -82,14 +82,14 @@ export default class SearchSelect extends React.Component {
     cities: ["London", "Monaco"],
   };
 
-  handleChange = (e) => {
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const firstLetterUpperCase = e.target.value.charAt(0).toUpperCase();
     const upperCaseAdded =
       firstLetterUpperCase + e.target.value.slice(1, e.target.value.length).toLowerCase();
     this.setState({ inputValue: upperCaseAdded });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const newCity = this.state.inputValue;
     const cityDuplicated = this.state.cities.find((city) => city === newCity);
@@ -100,7 +100,7 @@ export default class SearchSelect extends React.Component {
       });
   };
 
-  handleRemove = (city) => {
+  handleRemove = (city: string) => {
     const newCities = this.state.cities.filter((element) => element !== city);
     this.setState({ cities: newCities });
   };

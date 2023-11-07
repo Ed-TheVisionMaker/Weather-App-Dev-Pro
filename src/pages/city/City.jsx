@@ -2,8 +2,8 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import LoadingDisplay from "../../components/LoadingDisplay/LoadingDisplay";
-import ErrorDisplay from "../../components/ErrorDisplay/ErrorDisplay";
+import LoadingDisplay from "../../components/LoadingDisplay";
+import ErrorDisplay from "../../components/ErrorDisplay";
 import DisplayData from "../../components/DisplayData/DisplayData";
 
 const DisplayDataStyling = styled.div`
