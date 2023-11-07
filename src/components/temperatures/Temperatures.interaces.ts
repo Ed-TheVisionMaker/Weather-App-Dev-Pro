@@ -1,5 +1,3 @@
-import { UnitButtonProps } from "../UnitsButton/UnitButton.interfaces";
-
 export interface TemperaturesProps {
   temps: {
     temp: number;
@@ -7,6 +5,7 @@ export interface TemperaturesProps {
     temp_max: number;
     feels_like: number;
     humidity: number;
+    // pressure?
   };
-  currentUnits: UnitButtonProps;
+  currentUnits: 'Celcius' | 'Fahrenheit';
 }

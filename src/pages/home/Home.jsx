@@ -41,7 +41,7 @@ export default class Home extends React.Component {
     isLoading: false,
     isErrorLocation: false,
     isErrorData: false,
-    currentUnits: "metric",
+    currentUnits: "Celcius",
   };
 
   getUserLocation = () => {
@@ -74,19 +74,23 @@ export default class Home extends React.Component {
       const { id, description } = userData.data.weather[0];
       const { speed, deg } = userData.data.wind;
       const data = {
-        temp,
-        feels_like,
-        temp_min,
-        temp_max,
-        pressure,
-        humidity,
+        temps: {
+          temp,
+          feels_like,
+          temp_min,
+          temp_max,
+          pressure,
+          humidity,
+        },
         timezone,
         sunrise,
         sunset,
         iconId: id,
         description,
-        speed,
-        deg,
+        wind: {
+          speed,
+          deg,
+        },
         location,
       };
 

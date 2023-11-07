@@ -39,7 +39,7 @@ export default class City extends React.Component {
     dailyData: null,
     isLoading: false,
     isError: false,
-    currentUnits: "metric",
+    currentUnits: "Celcius",
   };
 
   getCityData = async (city) => {
@@ -75,11 +75,11 @@ export default class City extends React.Component {
   };
 
   handleChangeUnits = () => {
-    if(this.state.currentUnits === "metric") {
+    if(this.state.currentUnits === "Celcius") {
       this.setState({ currentUnits: "imperial" })
     }
     else {
-      this.setState({ currentUnits: "metric" })
+      this.setState({ currentUnits: "Fahrenheit" })
     }
   };
 

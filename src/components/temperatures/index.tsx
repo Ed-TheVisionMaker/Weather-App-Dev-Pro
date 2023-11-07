@@ -10,7 +10,7 @@ const DataContainer = styled.div`
 `;
 
 const Temperatures = (props: TemperaturesProps) => {
-  const { temp, temp_min, temp_max, feels_like, humidity } = props.temps;
+  const { temp, temp_min, temp_max, feels_like, humidity } = props.temps ?? {};
   const currentUnits = props.currentUnits
   console.log(currentUnits, "currentUnits in Temps")
   return (
@@ -32,7 +32,7 @@ const Temperatures = (props: TemperaturesProps) => {
         />
         <DataContainer>
           Max
-          <span>{props.currentUnits === "metric" ? Math.round(temp_max) : Math.round((temp_max * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(temp_max) : Math.round((temp_max * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="minTemp iconDiv">
@@ -42,7 +42,7 @@ const Temperatures = (props: TemperaturesProps) => {
         />
         <DataContainer>
           Min
-          <span>{props.currentUnits === "metric" ? Math.round(temp_min) : Math.round((temp_min * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(temp_min) : Math.round((temp_min * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="feelsLike iconDiv">
@@ -52,7 +52,7 @@ const Temperatures = (props: TemperaturesProps) => {
         />
         <DataContainer>
           Feels Like
-          <span>{props.currentUnits === "metric" ? Math.round(feels_like) : Math.round((feels_like * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(feels_like) : Math.round((feels_like * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="humidity iconDiv">

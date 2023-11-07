@@ -18,9 +18,6 @@ const DataContainerStyling = styled.div`
 
 export default class DisplayData extends React.Component<DisplayDataProps> {
   render() {
-    // const cityId = this.props.cityId;
-    console.log(this.props?.data, "this.props.data");
-    // const {description, icon} = this.props.data
     const { data, handleChangeUnits, currentUnits } = this.props;
     const {
       description,
