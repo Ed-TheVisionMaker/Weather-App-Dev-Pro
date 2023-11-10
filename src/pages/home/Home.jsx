@@ -65,7 +65,6 @@ export default class Home extends React.Component {
       const userData = await axios(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`
       );
-      console.log(userData, "userData");
       const location = userData.data.name;
       const { temp, feels_like, temp_min, temp_max, pressure, humidity } =
         userData.data.main;

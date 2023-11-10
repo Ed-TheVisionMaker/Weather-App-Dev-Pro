@@ -1,4 +1,4 @@
 export interface UnitButtonProps {
-    currentUnits: 'Celcius' | 'Fahrenheit';
     handleChangeUnits: () => void;
+    currentUnits: 'Celcius' | 'Fahrenheit';
 }
