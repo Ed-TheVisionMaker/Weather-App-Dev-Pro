@@ -1,11 +1,11 @@
 export interface TemperaturesProps {
   temps: {
     temp: number;
-    temp_min: number;
-    temp_max: number;
-    feels_like: number;
+    tempMin: number;
+    tempMax: number;
+    feelsLike: number;
     humidity: number;
-    // pressure?
+    pressure: number;
   };
-  currentUnits: 'Celcius' | 'Fahrenheit';
+  currentUnits?: 'Celcius' | 'Fahrenheit';
 }

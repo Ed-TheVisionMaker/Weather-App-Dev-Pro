@@ -5,5 +5,5 @@ export interface WindProps {
     speed: number;
     deg: number;
   };
-  currentUnits: 'Celcius' | 'Fahrenheit';
+  currentUnits?: 'Celcius' | 'Fahrenheit';
 }

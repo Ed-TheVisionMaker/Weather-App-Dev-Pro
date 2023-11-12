@@ -85,11 +85,11 @@ export default class City extends Component<
       const data = {
         temps: {
           temp,
-          feelsLike: feels_like,
           tempMin: temp_min,
           tempMax: temp_max,
-          pressure,
+          feelsLike: feels_like,
           humidity,
+          pressure,
         },
         timezone,
         sunrise,
@@ -129,7 +129,6 @@ export default class City extends Component<
   }
 
   render() {
-    // destructure data to necessary objects to simplify interfaces for TS
     const cityId = this.props.match.params.cityId;
     const isLoading = this.state.isLoading;
     const isError = this.state.isError;

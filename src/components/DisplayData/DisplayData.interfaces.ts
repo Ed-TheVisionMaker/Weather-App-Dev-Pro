@@ -5,7 +5,7 @@ import { WindProps } from "../Wind/Wind.interfaces";
 import { UnitButtonProps } from "../UnitsButton/UnitButton.interfaces";
 
 export interface DisplayDataProps {
-    data: DescriptionProps & SunriseSunsetProps & TemperaturesProps & WindProps;
-    currentUnits: UnitButtonProps;
-    handleChangeUnits: () => void,
+    data: DescriptionProps & SunriseSunsetProps & TemperaturesProps & WindProps | null;
+    currentUnits?: UnitButtonProps;
+    handleChangeUnits?: () => void,
 }

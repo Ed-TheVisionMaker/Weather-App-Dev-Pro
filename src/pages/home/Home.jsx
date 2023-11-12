@@ -75,9 +75,9 @@ export default class Home extends React.Component {
       const data = {
         temps: {
           temp,
-          feels_like,
-          temp_min,
-          temp_max,
+          feelsLike: feels_like,
+          tempMin: temp_min,
+          tempMax: temp_max,
           pressure,
           humidity,
         },
