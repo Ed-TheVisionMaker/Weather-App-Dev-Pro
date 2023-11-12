@@ -7,7 +7,8 @@ import styled from 'styled-components';
 import { CityState, CityParams, CityData } from './City.interface';
 import LoadingDisplay from '../../components/LoadingDisplay';
 import ErrorDisplay from '../../components/ErrorDisplay';
-import DisplayData from '../../components/DisplayData/DisplayData';
+import DisplayData from '../../components/DisplayData';
+import { DisplayDataProps } from '../../components/DisplayData/DisplayData.interfaces';
 
 const DisplayDataStyling = styled.div`
   display: flex;
