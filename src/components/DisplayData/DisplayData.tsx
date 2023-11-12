@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import Description from "../Description";
-import SunriseSunset from "../SunriseSunset";
-import Temperatures from "../Temperatures";
-import Wind from "../Wind";
-import UnitsButton from "../UnitsButton";
-import { DisplayDataProps } from "./DisplayData.interfaces";
+import Description from '../Description';
+import SunriseSunset from '../SunriseSunset';
+import Temperatures from '../Temperatures';
+import Wind from '../Wind';
+import UnitsButton from '../UnitsButton';
+import { DisplayDataProps } from './DisplayData.interfaces';
 
 const DataContainerStyling = styled.div`
   width: 80%;
@@ -20,19 +20,18 @@ export default class DisplayData extends React.Component<DisplayDataProps> {
   render() {
     const { data, handleChangeUnits, currentUnits } = this.props;
     const {
-      description,
-      icon,
-      temps,
-      timezone,
-      sunrise,
-      sunset,
-      wind,
-
-    } = data;
+      description = '',
+      iconId = '',
+      temps = {},
+      timezone = 0,
+      sunrise = 0,
+      sunset = 0,
+      wind = {},
+    } = data ?? {};
 
     return (
       <>
-        <Description description={description} icon={icon} />
+        <Description description={description} iconId={iconId} />
         <DataContainerStyling>
           <SunriseSunset
             timezone={timezone}
@@ -43,14 +42,8 @@ export default class DisplayData extends React.Component<DisplayDataProps> {
             currentUnits={currentUnits}
             handleChangeUnits={handleChangeUnits}
           />
-          <Temperatures
-            temps={temps}
-            currentUnits={this.props.currentUnits}
-          />
-          <Wind
-            wind={wind}
-            currentUnits={this.props.currentUnits}
-          />
+          <Temperatures temps={temps} currentUnits={this.props.currentUnits} />
+          <Wind wind={wind} currentUnits={this.props.currentUnits} />
         </DataContainerStyling>
       </>
     );

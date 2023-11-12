@@ -1,4 +1,4 @@
     export interface DescriptionProps {
-    description: string;
-    iconId: string;
+    description: string | null;
+    iconId: string | null;
     }
