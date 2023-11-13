@@ -5,8 +5,8 @@ import styled from "styled-components";
 
 import Home from "./pages/Home/Home";
 import City from "./pages/City/City";
-import SearchSelect from "./components/SearchSelect/SearchSelect";
-import MainIcon from "./components/MainIcon/MainIcon";
+import SearchSelect from "./components/SearchSelect";
+import MainIcon from "./components/MainIcon";
 
 const Container = styled.div `
   display: flex;

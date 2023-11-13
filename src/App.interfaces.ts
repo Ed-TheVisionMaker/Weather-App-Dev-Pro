@@ -5,8 +5,8 @@ export interface DisplayDataProps {
 };
 
 export interface DescriptionProps {
-    description: string | null;
-    iconId: string | null;
+    description: string;
+    iconId: string;
     }
 
 

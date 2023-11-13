@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { DescriptionProps } from "./Description.interface";
+import { DescriptionProps } from '../../App.interfaces';
 
 const DescriptionStyle = styled.div`
   display: flex;
@@ -31,11 +31,11 @@ const descriptionChangeCase = (descriptionWeather :string) => {
     return descriptionWeather
 };
 
-const Description = ({description, icon}: DescriptionProps ) => {
+const Description = ({description, iconId}: DescriptionProps ) => {
   const descriptionCaseCorrected = descriptionChangeCase(description);
   return (
     <DescriptionStyle>
-      <img className="weatherIcon" src={`https://openweathermap.org/img/wn/${icon}@2x.png`} />
+      <img className="weatherIcon" src={`https://openweathermap.org/img/wn/${iconId}@2x.png`} />
       <p>{descriptionCaseCorrected}</p>
     </DescriptionStyle>
   );

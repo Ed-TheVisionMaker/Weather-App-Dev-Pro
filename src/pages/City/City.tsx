@@ -5,10 +5,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import { CityState, CityParams, CityData } from './City.interface';
-import LoadingDisplay from '../../components/LoadingDisplay';
-import ErrorDisplay from '../../components/ErrorDisplay';
-import DisplayData from '../../components/DisplayData';
-import { DisplayDataProps } from '../../components/DisplayData/DisplayData.interfaces';
+import LoadingDisplay from '../../components/LoadingDisplay/index';
+import ErrorDisplay from '../../components/ErrorDisplay/index';
+import DisplayData from '../../components/DisplayData/index';
 
 const DisplayDataStyling = styled.div`
   display: flex;
@@ -81,8 +80,6 @@ export default class City extends Component<
       const { id, description } = cityData.data.weather[0];
       const { speed, deg } = cityData.data.wind;
 
-      // change this for the home too
-      // lift everything up to an interfaces as a file in src
       const data = {
         temps: {
           temp,

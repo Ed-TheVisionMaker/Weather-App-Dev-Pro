@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { TemperaturesProps } from "./Temperatures.interaces";
-
+import { TemperaturesProps } from '../../App.interfaces';
 
 const DataContainer = styled.div`
   width: 100%;
@@ -10,9 +9,8 @@ const DataContainer = styled.div`
 `;
 
 const Temperatures = (props: TemperaturesProps) => {
-  const { temp, temp_min, temp_max, feels_like, humidity } = props.temps ?? {};
+  const { temp, tempMin, tempMax, feelsLike, humidity } = props.temps ?? {};
   const currentUnits = props.currentUnits
-  console.log(currentUnits, "currentUnits in Temps")
   return (
     <>
       <div className="averageTemp iconDiv">
@@ -32,7 +30,7 @@ const Temperatures = (props: TemperaturesProps) => {
         />
         <DataContainer>
           Max
-          <span>{currentUnits === "Celcius" ? Math.round(temp_max) : Math.round((temp_max * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(tempMax) : Math.round((tempMax * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="minTemp iconDiv">
@@ -42,7 +40,7 @@ const Temperatures = (props: TemperaturesProps) => {
         />
         <DataContainer>
           Min
-          <span>{currentUnits === "Celcius" ? Math.round(temp_min) : Math.round((temp_min * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(tempMin) : Math.round((tempMin * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="feelsLike iconDiv">
@@ -52,7 +50,7 @@ const Temperatures = (props: TemperaturesProps) => {
         />
         <DataContainer>
           Feels Like
-          <span>{currentUnits === "Celcius" ? Math.round(feels_like) : Math.round((feels_like * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(feelsLike) : Math.round((feelsLike * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="humidity iconDiv">
