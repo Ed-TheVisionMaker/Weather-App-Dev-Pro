@@ -124,7 +124,7 @@ export default class Home extends React.Component {
         {!isErrorData && !isErrorLocation && isLoading && <LoadingDisplay />}
         {hasData && (
           <DisplayDataStyling>
-            <h2>The weather forecast for {this.state.userData.location}</h2>
+            <h2>{`The weather forecast for ${location}`}</h2>
             <DisplayData
               data={this.state.userData}
               handleChangeUnits={this.handleChangeUnits}
