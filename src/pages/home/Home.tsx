@@ -2,10 +2,10 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import DisplayData from "../../components/DisplayData/DisplayData";
-import LoadingDisplay from "../../components/LoadingDisplay/LoadingDisplay";
-import ErrorDisplay from "../../components/ErrorDisplay/ErrorDisplay";
-import ErrorLocation from "../../components/ErrorLocation/ErrorLocation";
+import DisplayData from '../../components/DisplayData';
+import LoadingDisplay from "../../components/LoadingDisplay";
+import ErrorDisplay from "../../components/ErrorDisplay";
+import ErrorLocation from "../../components/ErrorLocation";
 
 const DisplayDataStyling = styled.div`
   display: flex;
@@ -41,42 +41,70 @@ export default class Home extends React.Component {
     isLoading: false,
     isErrorLocation: false,
     isErrorData: false,
-    currentUnits: "metric",
+    currentUnits: "Celcius",
   };
 
   getUserLocation = () => {
     this.setState({ isLoading: true });
     navigator.geolocation.getCurrentPosition(
-       (position) => {
+      (position) => {
         const lat = position.coords.latitude;
         const long = position.coords.longitude;
         this.setState({ userLat: lat, userLong: long });
         this.getUserData(lat, long);
       },
       (error) => {
-        this.setState({ isLoading: false, isErrorLocation: true })
+        this.setState({ isLoading: false, isErrorLocation: true });
       }
     );
   };
 
-  getUserData = async (lat, long) => {
+  getUserData = async (lat: number, long: number) => {
     try {
-      const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
+      console.log(import.meta.env, "import meta")
+      const apiKey : string = import.meta.env.VITE_REACT_APP_API_KEY;
       const userData = await axios(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`
       );
-      this.setState({ userData: userData, isLoading: false });
+      const location = userData.data.name;
+      const { temp, feels_like, temp_min, temp_max, pressure, humidity } =
+        userData.data.main;
+      const timezone = userData.data.timezone;
+      const { sunrise, sunset } = userData.data.sys;
+      const { id, description } = userData.data.weather[0];
+      const { speed, deg } = userData.data.wind;
+      const data = {
+        temps: {
+          temp,
+          feelsLike: feels_like,
+          tempMin: temp_min,
+          tempMax: temp_max,
+          pressure,
+          humidity,
+        },
+        timezone,
+        sunrise,
+        sunset,
+        iconId: id,
+        description,
+        wind: {
+          speed,
+          deg,
+        },
+        location,
+      };
+
+      this.setState({ userData: data, isLoading: false });
     } catch (error) {
       this.setState({ isLoading: false, isErrorData: true });
     }
   };
 
   handleChangeUnits = () => {
-    if(this.state.currentUnits === "metric") {
-      this.setState({ currentUnits: "imperial" })
-    }
-    else {
-      this.setState({ currentUnits: "metric" })
+    if (this.state.currentUnits === "Celcius") {
+      this.setState({ currentUnits: "Fahrenheit" });
+    } else {
+      this.setState({ currentUnits: "Celcius" });
     }
   };
 
@@ -96,8 +124,12 @@ export default class Home extends React.Component {
         {!isErrorData && !isErrorLocation && isLoading && <LoadingDisplay />}
         {hasData && (
           <DisplayDataStyling>
-            <h2>The weather forecast for {this.state.userData.data.name}</h2>
-            <DisplayData data={this.state.userData} handleChangeUnits={this.handleChangeUnits} currentUnits={this.state.currentUnits}/>
+            <h2>{`The weather forecast for ${location}`}</h2>
+            <DisplayData
+              data={this.state.userData}
+              handleChangeUnits={this.handleChangeUnits}
+              currentUnits={this.state.currentUnits}
+            />
           </DisplayDataStyling>
         )}
       </>

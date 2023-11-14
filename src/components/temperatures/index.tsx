@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { TemperaturesProps } from '../../App.interfaces';
 
 const DataContainer = styled.div`
   width: 100%;
@@ -8,8 +8,9 @@ const DataContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Temperatures = (props) => {
-  const { temp, temp_min, temp_max, feels_like, humidity } = props.temps;
+const Temperatures = (props: TemperaturesProps) => {
+  const { temp, tempMin, tempMax, feelsLike, humidity } = props.temps ?? {};
+  const currentUnits = props.currentUnits
   return (
     <>
       <div className="averageTemp iconDiv">
@@ -19,7 +20,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Av.
-          <span>{props.currentUnits === "metric" ? Math.round(temp) : Math.round((temp * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(temp) : Math.round((temp * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="maxTemp iconDiv">
@@ -29,7 +30,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Max
-          <span>{props.currentUnits === "metric" ? Math.round(temp_max) : Math.round((temp_max * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(tempMax) : Math.round((tempMax * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="minTemp iconDiv">
@@ -39,7 +40,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Min
-          <span>{props.currentUnits === "metric" ? Math.round(temp_min) : Math.round((temp_min * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(tempMin) : Math.round((tempMin * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="feelsLike iconDiv">
@@ -49,7 +50,7 @@ const Temperatures = (props) => {
         />
         <DataContainer>
           Feels Like
-          <span>{props.currentUnits === "metric" ? Math.round(feels_like) : Math.round((feels_like * 1.8) + 32)}</span>
+          <span>{currentUnits === "Celcius" ? Math.round(feelsLike) : Math.round((feelsLike * 1.8) + 32)}</span>
         </DataContainer>
       </div>
       <div className="humidity iconDiv">

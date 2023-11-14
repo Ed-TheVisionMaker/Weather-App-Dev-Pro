@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { UnitButtonProps } from "./UnitButton.interfaces";
 
 const UnitsButtonContainer = styled.div`
   width: 100%;
@@ -28,12 +29,12 @@ const UnitsButtonStyling = styled.button`
   }
 `;
 
-const UnitsButton = (props) => {
+const UnitsButton = ({ currentUnits, handleChangeUnits }: UnitButtonProps) => {
   return (
     <UnitsButtonContainer>
       <UnitsButtonInstruction>Current units:</UnitsButtonInstruction>
-      <UnitsButtonStyling onClick={() => props.handleChangeUnits()}>
-        {props.currentUnits === "metric" ? "Celcius" : "Fahrenheit"}
+      <UnitsButtonStyling onClick={() => handleChangeUnits()}>
+        {currentUnits === "Celcius" ? "Celcius" : "Fahrenheit"}
       </UnitsButtonStyling>
     </UnitsButtonContainer>
   );

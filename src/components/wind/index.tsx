@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { WindProps } from './Wind.interfaces';
 
 const WindDirectionIcon = styled.img`
 width: 25px;
@@ -20,8 +21,7 @@ const DataContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Wind = (props) => {
-  const { speed, deg } = props.wind;
+const Wind = ({wind: {speed, deg}, currentUnits}: WindProps) => {
   const toMph = 2.2369362920544;
   return (
     <>
@@ -32,8 +32,8 @@ const Wind = (props) => {
         />
         <DataContainer>
           Wind Speed
-          {props.currentUnits === "metric" && <DataSpanStyling>{speed}m/s</DataSpanStyling>}
-          {props.currentUnits === "imperial" && <DataSpanStyling>{(speed * toMph).toFixed(2)}mph</DataSpanStyling>}
+          {currentUnits === "Celcius" && <DataSpanStyling>{speed}m/s</DataSpanStyling>}
+          {currentUnits === "Fahrenheit" && <DataSpanStyling>{(speed * toMph).toFixed(2)}mph</DataSpanStyling>}
         </DataContainer>
       </div>
       <div className="windDirection iconDiv">

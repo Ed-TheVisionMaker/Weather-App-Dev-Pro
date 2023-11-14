@@ -31,7 +31,7 @@ const LoadingDisplayStyling = styled.div`
   }
 `;
 
-const LoadingDisplay = (props) => {
+const LoadingDisplay = () => {
   return (
     <LoadingDisplayStyling>
       <div className="isLoadingContainer">
