@@ -1,9 +1,6 @@
-import "../env.d.ts";
-import.meta;
 import React from "react";
 import axios from "axios";
 import styled from "styled-components";
-
 
 import DisplayData from '../../components/DisplayData';
 import LoadingDisplay from "../../components/LoadingDisplay";
@@ -64,12 +61,13 @@ export default class Home extends React.Component {
 
   getUserData = async (lat: number, long: number) => {
     try {
+      console.log(import.meta.env, "import meta")
       const apiKey : string = import.meta.env.VITE_REACT_APP_API_KEY;
       const userData = await axios(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`
       );
       const location = userData.data.name;
-      const { temp, feels_like, temp_ min, temp_max, pressure, humidity } =
+      const { temp, feels_like, temp_min, temp_max, pressure, humidity } =
         userData.data.main;
       const timezone = userData.data.timezone;
       const { sunrise, sunset } = userData.data.sys;

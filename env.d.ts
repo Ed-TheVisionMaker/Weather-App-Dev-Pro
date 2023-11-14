@@ -1,6 +1,9 @@
-/// <reference types="vite" />
+/// <reference types="vite/client" />
+
 interface ImportMetaEnv {
-  env: {
-    VITE_REACT_APP_API_KEY: string;
-  };
+  readonly VITE_REACT_APP_API_KEY: string
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
 }
