@@ -33,8 +33,39 @@ const DisplayDataStyling = styled.div`
     border-radius: 25px;
   }
 `;
+
+interface WeatherData {
+  temps: {
+    temp: number;
+    feelsLike: number;
+    tempMin: number;
+    tempMax: number;
+    pressure: number;
+    humidity: number;
+  };
+  timezone: string;
+  sunrise: number;
+  sunset: number;
+  iconId: string;
+  description: string;
+  wind: {
+    speed: number;
+    deg: number;
+  };
+  location: string;
+}
+interface State {
+  userData: WeatherData | null;
+  userLat: number | null;
+  userLong: number | null;
+  isLoading: boolean;
+  isErrorLocation: boolean;
+  isErrorData: boolean;
+  currentUnits: "Celcius" | "Fahrenheit";
+}
+
 export default class Home extends React.Component {
-  state = {
+  state: State = {
     userData: null,
     userLat: null,
     userLong: null,
@@ -45,6 +76,7 @@ export default class Home extends React.Component {
   };
 
   getUserLocation = () => {
+    console.log("Getting user location");
     this.setState({ isLoading: true });
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -61,7 +93,6 @@ export default class Home extends React.Component {
 
   getUserData = async (lat: number, long: number) => {
     try {
-      console.log(import.meta.env, "import meta")
       const apiKey : string = import.meta.env.VITE_REACT_APP_API_KEY;
       const userData = await axios(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=metric`
@@ -94,6 +125,7 @@ export default class Home extends React.Component {
         location,
       };
 
+
       this.setState({ userData: data, isLoading: false });
     } catch (error) {
       this.setState({ isLoading: false, isErrorData: true });
@@ -117,6 +149,7 @@ export default class Home extends React.Component {
     const isLoading = this.state.isLoading;
     const isErrorData = this.state.isErrorData;
     const isErrorLocation = this.state.isErrorLocation;
+    console.log(this.state.userData);
     return (
       <>
         {isErrorLocation && <ErrorLocation />}
@@ -124,7 +157,7 @@ export default class Home extends React.Component {
         {!isErrorData && !isErrorLocation && isLoading && <LoadingDisplay />}
         {hasData && (
           <DisplayDataStyling>
-            <h2>{`The weather forecast for ${location}`}</h2>
+            <h2>{`The weather forecast for ${this.state.userData?.location}`}</h2>
             <DisplayData
               data={this.state.userData}
               handleChangeUnits={this.handleChangeUnits}

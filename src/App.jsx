@@ -51,6 +51,7 @@ body {
   margin: 0;
   padding: 0;
   display: flex;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }

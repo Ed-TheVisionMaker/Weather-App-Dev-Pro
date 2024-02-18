@@ -59,7 +59,6 @@ export default class City extends Component<
       let cityLong: number | null = null;
 
       geoCodeUrl.data.find((returnedCities: CityData) => {
-        console.log(returnedCities);
         if (returnedCities.name === city) {
           cityLat = returnedCities.lat;
           cityLong = returnedCities.lon;
