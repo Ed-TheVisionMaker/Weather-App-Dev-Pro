@@ -1,16 +1,16 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { createGlobalStyle } from "styled-components";
-import styled from "styled-components";
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 
-import Home from "./pages/Home/Home";
-import City from "./pages/City/City";
-import SearchSelect from "./components/SearchSelect";
-import MainIcon from "./components/MainIcon";
+import Home from './pages/Home/Home';
+import City from './pages/City/City';
+import SearchSelect from './components/SearchSelect';
+import MainIcon from './components/MainIcon';
 
-const Container = styled.div `
+const Container = styled.div`
   display: flex;
-`
+`;
 
 const GlobalStyling = createGlobalStyle`
 :root {
@@ -70,7 +70,14 @@ button {
 button:hover {
   border-color: #646cff;
 }
-`
+`;
+
+const AppWrapper = styled.div`
+  display: flex;
+  margin-top: 30px;
+  border-radius: 20px;
+  background-color: var(--blue);
+`;
 
 const InteractiveContainer = styled.div`
   display: flex;
@@ -78,21 +85,24 @@ const InteractiveContainer = styled.div`
   align-items: center;
   padding-top: 40px;
   background-image: linear-gradient(180deg, var(--darkBlue), var(--blue));
-`
+  border-radius: 20px;
+`;
 
 function App() {
   return (
     <Router>
-        <GlobalStyling />
-        <Container>
-        <InteractiveContainer>
-        <MainIcon />
-        <SearchSelect />
-        </InteractiveContainer>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/city/:cityId" component={City}/>
-        </Switch>
+      <GlobalStyling />
+      <Container>
+        <AppWrapper>
+          <InteractiveContainer>
+            <MainIcon />
+            <SearchSelect />
+          </InteractiveContainer>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/city/:cityId' component={City} />
+          </Switch>
+        </AppWrapper>
       </Container>
     </Router>
   );

@@ -15,6 +15,8 @@ const DisplayDataStyling = styled.div`
   height: inherit;
   background-image: linear-gradient(90deg, var(--blue), var(--darkBlue));
   padding: 0 25px;
+  border-radius: 20px;
+
 
   .iconDiv {
     display: flex;

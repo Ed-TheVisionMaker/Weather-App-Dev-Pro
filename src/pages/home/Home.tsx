@@ -13,6 +13,7 @@ const DisplayDataStyling = styled.div`
   height: inherit;
   background-image: linear-gradient(90deg, var(--blue), var(--darkBlue));
   padding: 0 25px;
+  border-radius: 20px;
 
   .iconDiv {
     display: flex;
@@ -149,7 +150,6 @@ export default class Home extends React.Component {
     const isLoading = this.state.isLoading;
     const isErrorData = this.state.isErrorData;
     const isErrorLocation = this.state.isErrorLocation;
-    console.log(this.state.userData);
     return (
       <>
         {isErrorLocation && <ErrorLocation />}

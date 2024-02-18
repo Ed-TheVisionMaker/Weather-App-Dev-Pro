@@ -35,7 +35,7 @@ const Description = ({description, iconId}: DescriptionProps ) => {
   const descriptionCaseCorrected = descriptionChangeCase(description);
   return (
     <DescriptionStyle>
-      <img className="weatherIcon" src={`https://openweathermap.org/img/wn/${iconId}@2x.png`} />
+      {/* <img className="weatherIcon" src={`https://openweathermap.org/img/wn/${iconId}@2x.png`} /> */}
       <p>{descriptionCaseCorrected}</p>
     </DescriptionStyle>
   );
